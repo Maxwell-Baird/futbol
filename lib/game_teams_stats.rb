@@ -1,8 +1,11 @@
 require_relative 'game_teams'
 require_relative 'data_loadable'
+require_relative 'compiler'
 
 class GameTeamStats
   include DataLoadable
+  extend Compiler
+  include Compiler
   attr_reader :game_teams
 
   def initialize(file_path, object)
@@ -14,7 +17,8 @@ class GameTeamStats
   end
 
   def games_by_team(team_id)
-    @game_teams.find_all { |team| team.team_id == team_id }
+    find_all(@game_teams, team_id)
+    # @game_teams.find_all { |team| team.team_id == team_id }
   end
 
   def total_games_by_team_id(team_id)
@@ -22,6 +26,7 @@ class GameTeamStats
   end
 
   def total_goals_by_team_id(team_id)
+    # total(games_by_team(team_id), goals)
     games_by_team(team_id).sum { |game_team| game_team.goals }
   end
 
@@ -30,11 +35,11 @@ class GameTeamStats
   end
 
   def best_offense
-    team_id = unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) }
+    unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) }
   end
 
   def worst_offense
-    team_id = unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
+    unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
   end
 
   def percent_differences
@@ -90,8 +95,7 @@ class GameTeamStats
   end
 
   def best_fans
-    team_id = percent_differences.key(percent_differences.values.max).to_i
-    team_id
+   percent_differences.key(percent_differences.values.max).to_i
   end
 
   def worst_fans
