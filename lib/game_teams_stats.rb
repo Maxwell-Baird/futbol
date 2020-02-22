@@ -4,8 +4,8 @@ require_relative 'compiler'
 
 class GameTeamStats
   include DataLoadable
-  extend Compiler
-  include Compiler
+  extend Compilable
+  include Compilable
   attr_reader :game_teams
 
   def initialize(file_path, object)
@@ -17,7 +17,8 @@ class GameTeamStats
   end
 
   def games_by_team(team_id)
-    find_all(@game_teams, team_id)
+    find_all_arrays
+      
     # @game_teams.find_all { |team| team.team_id == team_id }
   end
 

@@ -1,8 +1,12 @@
-module Compiler
+module Compilable
 
-  def find_all(collection, arg2, arg3 = nil)
-    collection.find_all { |bv| arg2 == arg2 }
+  def find_all_arrays(collection, arg2)
+    collection.find_all { |bv| bv.send() == arg2 }
   end
+
+#change collection to be more specific
+
+
 
   def total(collection, arg2, arg3: nil)
     collection.sum { |bv| arg2 }
