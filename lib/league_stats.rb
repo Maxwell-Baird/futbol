@@ -11,13 +11,13 @@ class LeagueStats
   end
 
   def best_offense
-    team_id = unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) }
-    find_name(team_id)
+    best_offense_id = unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) }
+    find_name(best_offense_id)
   end
 
   def worst_offense
-    team_id = unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
-    find_name(team_id)
+    worst_offense_id = unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
+    find_name(worst_offense_id)
   end
 
   def lowest_scoring_visitor
