@@ -68,36 +68,4 @@ class GameStatsTest < Minitest::Test
       '20162017' => 4}
       assert_equal goals_by_season, @game_stats.average_goals_by_season
   end
-
-  def test_returns_home_id_and_away_goals
-    #First object within each array is home_id.
-    #Second object is total of of away_id_goals
-    expected = {5=>3, 26=>2, 17=>2, 30=>6, 12=>1, 18=>1}
-
-    assert_equal expected, @game_stats.home_id_defense_stats
-  end
-
-  def test_returns_away_id_and_home_goals
-    #First object within each array is away_id.
-    #Second object is total of of home_id_goals
-    expected = {15=>2, 3=>3, 7=>3, 22=>2, 10=>2, 53=>3, 25=>3}
-
-    assert_equal expected, @game_stats.away_id_defense_stats
-  end
-
-  def test_defense_helper_returns_correct_hash
-    expected = {5=>3, 26=>2, 17=>2, 30=>6, 12=>1, 18=>1, 15=>2, 3=>3, 7=>3, 22=>2, 10=>2, 53=>3, 25=>3}
-
-    assert_equal expected, @game_stats.defense_helper
-  end
-
-  def test_returns_best_defense
-    assert_equal 30, @game_stats.best_defense
-    # Orlando City SC
-  end
-
-  def test_returns_worst_defense
-    assert_equal 12, @game_stats.worst_defense
-    # Sky Blue FC
-  end
 end
