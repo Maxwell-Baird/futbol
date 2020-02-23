@@ -83,10 +83,10 @@ class GameStats
   end
 
   def best_defense
-    defense_helper.invert.max&.last
+    defense_helper.max_by { |id, goals| goals }.first
   end
 
   def worst_defense
-    defense_helper.invert.min&.last
+    defense_helper.min_by { |id, goals| goals }.first
   end
 end
