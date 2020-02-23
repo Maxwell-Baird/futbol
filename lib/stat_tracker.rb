@@ -73,6 +73,14 @@ class StatTracker
     @league_stats.worst_offense
   end
 
+  def best_defense
+    @league_stats.best_defense
+  end
+
+  def worst_defense
+    @league_stats.worst_defense
+  end
+
   def highest_scoring_visitor
     @league_stats.highest_scoring_visitor
   end
