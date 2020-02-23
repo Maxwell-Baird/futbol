@@ -74,7 +74,7 @@ class GameStatsTest < Minitest::Test
     #Second object is total of of away_id_goals
     expected = [[5, 3], [26, 2], [17, 2], [30, 6], [12, 1], [18, 1]]
 
-    assert_equal expected, @games_stats.home_id_defense_stats
+    assert_equal expected, @game_stats.home_id_defense_stats
   end
 
   def test_returns_away_id_and_home_goals
@@ -82,6 +82,6 @@ class GameStatsTest < Minitest::Test
     #Second object is total of of home_id_goals
     expected = [[15, 2], [3, 3], [7, 3], [22, 2], [10, 2], [53, 3], [25, 3]]
 
-    assert_equal expected, @games_stats.away_id_defense_stats
+    assert_equal expected, @game_stats.away_id_defense_stats
   end
 end
