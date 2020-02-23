@@ -83,8 +83,8 @@ class LeagueStats < Stats
 
 # Helper Methods
   def find_name(id)
-    team = @teams.find { |team| team.team_id == id }
-    team.teamname
+    team_id = @teams.find { |team| team.team_id == id }
+    team_id.teamname
   end
 
   def unique_team_ids
@@ -199,7 +199,6 @@ class LeagueStats < Stats
     games_by_team(team_id).length
   end
 
-
   def home_id_defense_stats
     @games.group_by(&:home_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
@@ -211,8 +210,8 @@ class LeagueStats < Stats
   end
 
   def defense_helper
-    defense_stats = home_id_defense_stats, away_id_defense_stats
-    defense_stats.reduce({}) do |sums, location|
+    combined_stats = home_id_defense_stats, away_id_defense_stats
+    combined_stats.reduce({}) do |sums, location|
       sums.merge(location) { |_, a, b| a + b }
     end
   end
