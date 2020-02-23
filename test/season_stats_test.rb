@@ -15,4 +15,21 @@ class SeasonStatsTest < Minitest::Test
     @stat_tracker = StatTracker.from_csv(@locations)
     @season_stats = SeasonStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
   end
+
+  def test_it_exists
+    assert_instance_of SeasonStats, @season_stats
+  end
+
+  def test_it_has_attributes
+    assert_instance_of Array, @season_stats.games
+    assert_instance_of Game, @season_stats.games.first
+    assert_instance_of Array, @season_stats.teams
+    assert_instance_of Team, @season_stats.teams.first
+    assert_instance_of Array, @season_stats.game_teams
+    assert_instance_of GameTeam, @season_stats.game_teams.first
+  end
+
+  def test_it_returns_name_of_team_with_most_tackles
+    assert_equal "FC Dallas", @season_stats.most_tackles
+  end
 end
