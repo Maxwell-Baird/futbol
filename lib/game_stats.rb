@@ -86,4 +86,7 @@ class GameStats
     defense_helper.invert.max&.last
   end
 
+  def worst_defense
+    defense_helper.invert.min&.last
+  end
 end
