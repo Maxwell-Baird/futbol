@@ -162,12 +162,10 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_returns_best_defense
-    assert_equal 30, @league_stats.best_defense
-    # Orlando City SC
+    assert_equal "Orlando City SC", @league_stats.best_defense
   end
 
   def test_returns_worst_defense
-    assert_equal 12, @league_stats.worst_defense
-    # Sky Blue FC
+    assert_equal "Sky Blue FC", @league_stats.worst_defense
   end
 end
