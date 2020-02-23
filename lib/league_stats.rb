@@ -1,4 +1,4 @@
-require './lib/stats'
+require_relative './lib/stats'
 
 class LeagueStats < Stats
   def initialize(games, teams, game_teams)
