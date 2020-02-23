@@ -73,11 +73,13 @@ class LeagueStats
   end
 
   def best_defense
-    defense_helper.max_by { |id, goals| goals }.first
+    best_defense_id = defense_helper.max_by { |id, goals| goals }.first
+    find_name(best_defense_id)
   end
 
   def worst_defense
-    defense_helper.min_by { |id, goals| goals }.first
+    worst_defense_id = defense_helper.min_by { |id, goals| goals }.first
+    find_name(worst_defense_id)
   end
 
 # Helper Methods
@@ -198,7 +200,7 @@ class LeagueStats
     games_by_team(team_id).length
   end
 
-  
+
   def home_id_defense_stats
     @games.group_by(&:home_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
