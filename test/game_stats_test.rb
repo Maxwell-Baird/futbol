@@ -68,4 +68,13 @@ class GameStatsTest < Minitest::Test
       '20162017' => 4}
       assert_equal goals_by_season, @game_stats.average_goals_by_season
   end
+
+  def test_returns_home_id_and_away_goals
+    #First object within each array is home_id.
+    #Second object is total of of away_id_goals
+    expected = [[5, 3], [26, 2], [17, 2], [30, 6], [12, 1], [18, 1]]
+
+    assert_equal expected, @games_stats.home_id_defense_stats
+  end
+  
 end
