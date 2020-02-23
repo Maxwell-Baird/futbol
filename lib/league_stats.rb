@@ -72,6 +72,14 @@ class LeagueStats
     team_names
   end
 
+  def best_defense
+    defense_helper.max_by { |id, goals| goals }.first
+  end
+
+  def worst_defense
+    defense_helper.min_by { |id, goals| goals }.first
+  end
+
 # Helper Methods
   def find_name(id)
     team = @teams.find { |team| team.team_id == id }
@@ -188,5 +196,23 @@ class LeagueStats
 
   def total_games_by_team_id(team_id)
     games_by_team(team_id).length
+  end
+
+  
+  def home_id_defense_stats
+    @games.group_by(&:home_team_id)
+    .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
+  end
+
+  def away_id_defense_stats
+    @games.group_by(&:away_team_id)
+    .map{ |id, away_goals| [id, away_goals.map(&:home_goals).inject(:+)] }.to_h
+  end
+
+  def defense_helper
+    defense_stats = home_id_defense_stats, away_id_defense_stats
+    defense_stats.reduce({}) do |sums, location|
+      sums.merge(location) { |_, a, b| a + b }
+    end
   end
 end
