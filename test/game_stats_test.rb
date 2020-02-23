@@ -93,10 +93,11 @@ class GameStatsTest < Minitest::Test
 
   def test_returns_best_defense
     assert_equal 30, @game_stats.best_defense
+    # Orlando City SC
   end
 
   def test_returns_worst_defense
-    skip
-    assert_equal 3, @game_stats.worst_defense
+    assert_equal 18, @game_stats.worst_defense
+    # Minnesota United FC
   end
 end
