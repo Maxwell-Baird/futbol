@@ -64,4 +64,11 @@ class GameStats
       average_goals
     end
   end
+
+  def home_id_defense_stats
+    @games.group_by(&:home_team_id)
+    .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
+  end
+
+
 end
