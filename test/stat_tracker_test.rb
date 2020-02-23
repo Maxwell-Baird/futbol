@@ -80,6 +80,14 @@ class StatTrackerTest < Minitest::Test
     assert_equal "FC Cincinnati", @stat_tracker.worst_offense
   end
 
+  def test_it_can_best_defense
+    assert_equal "the", @stat_tracker.best_defense
+  end
+
+  def test_it_can_worst_defense
+    assert_equal "the", @stat_tracker.worst_defense
+  end 
+
   def test_it_can_highest_scoring_visitor
     assert_equal "Real Salt Lake", @stat_tracker.highest_scoring_visitor
   end
