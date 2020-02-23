@@ -74,4 +74,12 @@ class GameStats
     @games.group_by(&:away_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:home_goals).inject(:+)] }.to_h
   end
+
+  def best_defense
+    stats = home_id_defense_stats, away_id_defense_stats
+    merged_stats = stats.reduce({}) do |sums, location|
+      sums.merge(location) { |_, a, b| a + b }
+    end
+    merged_stats.invert.max&.last
+  end
 end
