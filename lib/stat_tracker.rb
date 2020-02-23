@@ -3,8 +3,8 @@ require_relative 'team'
 require_relative 'game_team'
 require_relative 'game_stats'
 require_relative 'league_stats'
-# require_relative 'season_stats'
-# require_relative 'team_stats'
+require_relative 'season_stats'
+require_relative 'team_stats'
 require_relative './modules/data_loadable'
 
 class StatTracker
@@ -21,8 +21,8 @@ class StatTracker
     @game_teams = csv_data(locations[:game_teams], GameTeam)
     @game_stats = GameStats.new(@games)
     @league_stats = LeagueStats.new(@games, @teams, @game_teams)
-    # @season_stats = SeasonStats.new(@games, @game_teams, @teams)
-    # @team_stats = TeamStats.new(@games, @game_teams, @teams)
+    @season_stats = SeasonStats.new(@games, @game_teams, @teams)
+    @team_stats = TeamStats.new(@games, @game_teams, @teams)
   end
 
   def highest_total_score
@@ -71,6 +71,14 @@ class StatTracker
 
   def worst_offense
     @league_stats.worst_offense
+  end
+
+  def best_defense
+    @league_stats.best_defense
+  end
+
+  def worst_defense
+    @league_stats.worst_defense
   end
 
   def highest_scoring_visitor

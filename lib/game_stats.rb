@@ -1,8 +1,8 @@
-require './lib/stats'
+require_relative 'stats'
 
 class GameStats < Stats
   def initialize(games)
-    super(games)
+    super(games, teams, game_teams)
   end
 
   def highest_total_score

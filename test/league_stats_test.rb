@@ -42,13 +42,13 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "FC Cincinnati", @league_stats.worst_offense
   end
 
-  # def test_best_defense
-  #
-  # end
+  def test_best_defense
+    assert_equal "Orlando City SC", @league_stats.best_defense
+  end
 
-  # def test_worst_defense
-  #
-  # end
+  def test_worst_defense
+    assert_equal "Sky Blue FC", @league_stats.worst_defense
+  end
 
   def test_highest_scoring_visitor
     assert_equal "Real Salt Lake", @league_stats.highest_scoring_visitor

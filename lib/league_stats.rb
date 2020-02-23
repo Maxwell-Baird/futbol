@@ -1,4 +1,4 @@
-require './lib/stats'
+require_relative 'stats'
 
 class LeagueStats < Stats
   def initialize(games, teams, game_teams)
@@ -17,6 +17,16 @@ class LeagueStats < Stats
   def worst_offense
     worst_offense_id = unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
     find_name(worst_offense_id)
+  end
+
+  def best_defense
+    best_defense_id = defense_helper.max_by { |id, goals| goals }.first
+    find_name(best_defense_id)
+  end
+
+  def worst_defense
+    worst_defense_id = defense_helper.min_by { |id, goals| goals }.first
+    find_name(worst_defense_id)
   end
 
   def lowest_scoring_visitor
@@ -69,16 +79,6 @@ class LeagueStats < Stats
       end
     end
     team_names
-  end
-
-  def best_defense
-    best_defense_id = defense_helper.max_by { |id, goals| goals }.first
-    find_name(best_defense_id)
-  end
-
-  def worst_defense
-    worst_defense_id = defense_helper.min_by { |id, goals| goals }.first
-    find_name(worst_defense_id)
   end
 
 # Helper Methods
