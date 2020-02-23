@@ -75,11 +75,15 @@ class GameStats
     .map{ |id, away_goals| [id, away_goals.map(&:home_goals).inject(:+)] }.to_h
   end
 
-  def best_defense
-    stats = home_id_defense_stats, away_id_defense_stats
-    merged_stats = stats.reduce({}) do |sums, location|
+  def defense_helper
+    defense_stats = home_id_defense_stats, away_id_defense_stats
+    defense_stats.reduce({}) do |sums, location|
       sums.merge(location) { |_, a, b| a + b }
     end
-    merged_stats.invert.max&.last
   end
+
+  def best_defense
+    defense_helper.invert.max&.last
+  end
+
 end
