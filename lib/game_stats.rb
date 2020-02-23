@@ -64,29 +64,4 @@ class GameStats
       average_goals
     end
   end
-
-  def home_id_defense_stats
-    @games.group_by(&:home_team_id)
-    .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
-  end
-
-  def away_id_defense_stats
-    @games.group_by(&:away_team_id)
-    .map{ |id, away_goals| [id, away_goals.map(&:home_goals).inject(:+)] }.to_h
-  end
-
-  def defense_helper
-    defense_stats = home_id_defense_stats, away_id_defense_stats
-    defense_stats.reduce({}) do |sums, location|
-      sums.merge(location) { |_, a, b| a + b }
-    end
-  end
-
-  def best_defense
-    defense_helper.max_by { |id, goals| goals }.first
-  end
-
-  def worst_defense
-    defense_helper.min_by { |id, goals| goals }.first
-  end
 end
