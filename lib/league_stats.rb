@@ -193,7 +193,12 @@ class LeagueStats < Stats
 
   def total_shots_by_team_id(team_id)
     games_by_team(team_id).sum { |game_team| game_team.shots }
-  end 
+  end
+
+  def shot_accuracy_by_team_id(team_id)
+    (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
+    .floor
+  end
 
   def games_by_team(team_id)
     @game_teams.find_all { |team| team.team_id == team_id }
