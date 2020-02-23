@@ -76,5 +76,12 @@ class GameStatsTest < Minitest::Test
 
     assert_equal expected, @games_stats.home_id_defense_stats
   end
-  
+
+  def test_returns_away_id_and_home_goals
+    #First object within each array is away_id.
+    #Second object is total of of home_id_goals
+    expected = [[15, 2], [3, 3], [7, 3], [22, 2], [10, 2], [53, 3], [25, 3]]
+
+    assert_equal expected, @games_stats.away_id_defense_stats
+  end
 end
