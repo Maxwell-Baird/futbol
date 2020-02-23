@@ -97,7 +97,7 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_returns_worst_defense
-    assert_equal 18, @game_stats.worst_defense
-    # Minnesota United FC
+    assert_equal 12, @game_stats.worst_defense
+    # Sky Blue FC
   end
 end
