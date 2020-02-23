@@ -10,13 +10,13 @@ class LeagueStats < Stats
   end
 
   def best_offense
-    team_id = unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) }
-    find_name(team_id)
+    best_offense_id = unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) }
+    find_name(best_offense_id)
   end
 
   def worst_offense
-    team_id = unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
-    find_name(team_id)
+    worst_offense_id = unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
+    find_name(worst_offense_id)
   end
 
   def lowest_scoring_visitor
@@ -69,6 +69,16 @@ class LeagueStats < Stats
       end
     end
     team_names
+  end
+
+  def best_defense
+    best_defense_id = defense_helper.max_by { |id, goals| goals }.first
+    find_name(best_defense_id)
+  end
+
+  def worst_defense
+    worst_defense_id = defense_helper.min_by { |id, goals| goals }.first
+    find_name(worst_defense_id)
   end
 
 # Helper Methods
@@ -187,5 +197,23 @@ class LeagueStats < Stats
 
   def total_games_by_team_id(team_id)
     games_by_team(team_id).length
+  end
+
+
+  def home_id_defense_stats
+    @games.group_by(&:home_team_id)
+    .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
+  end
+
+  def away_id_defense_stats
+    @games.group_by(&:away_team_id)
+    .map{ |id, away_goals| [id, away_goals.map(&:home_goals).inject(:+)] }.to_h
+  end
+
+  def defense_helper
+    defense_stats = home_id_defense_stats, away_id_defense_stats
+    defense_stats.reduce({}) do |sums, location|
+      sums.merge(location) { |_, a, b| a + b }
+    end
   end
 end
