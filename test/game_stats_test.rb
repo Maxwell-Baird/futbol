@@ -84,4 +84,12 @@ class GameStatsTest < Minitest::Test
 
     assert_equal expected, @game_stats.away_id_defense_stats
   end
+
+  def test_returns_best_defense
+    assert_equal 3, @game_stats.best_defense
+  end
+
+  def test_returns_worst_defense
+    assert_equal 3, @game_stats.worst_defense
+  end
 end
