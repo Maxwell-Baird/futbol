@@ -23,4 +23,12 @@ class SeasonStatsTest < Minitest::Test
   # def test_it_can_return_least_accurate_team
   #   assert_equal "the", @season_stats.least_accurate_team(20142015)
   # end
+
+  def test_winningest_coach
+    assert_equal "Bruce Boudreau", @season_stats.winningest_coach("20142015")
+  end
+
+  def test_worst_coach
+    assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
+  end
 end

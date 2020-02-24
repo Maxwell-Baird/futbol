@@ -117,4 +117,21 @@ class StatTrackerTest < Minitest::Test
   def test_it_can_return_worst_fans
     assert_equal ["Real Salt Lake", "Minnesota United FC"], @stat_tracker.worst_fans
   end
+
+  def test_game_id_tracks_with_season
+    # this test is to prove that every game id tracks exactly with
+    # its season. E.g., game ids beginning with 2013 always have a
+    # season that begins with 2013.
+    @stat_tracker.games.each do |game|
+      assert_equal game.game_id[0..3], game.season[0..3]
+    end
+  end
+
+  def test_it_can_name_winningest_coach
+    assert_equal "Bruce Boudreau", @stat_tracker.winningest_coach("20142015")
+  end
+
+  def test_it_can_name_worst_coach
+    assert_equal "Darryl Sutter", @stat_tracker.worst_coach("20142015")
+  end
 end
