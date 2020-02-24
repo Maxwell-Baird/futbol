@@ -12,8 +12,7 @@ class StatTracker
   include DataLoadable
 
   def self.from_csv(locations)
-    StatTracker.new(locations)
-  end
+    StatTracker.new(locations) end
 
   def initialize(locations)
     @games = csv_data(locations[:games], Game)
@@ -22,8 +21,7 @@ class StatTracker
     @game_stats = GameStats.new(@games)
     @league_stats = LeagueStats.new(@games, @teams, @game_teams)
     @season_stats = SeasonStats.new(@games, @teams, @game_teams)
-    @team_stats = TeamStats.new(@games, @teams, @game_teams)
-  end
+    @team_stats = TeamStats.new(@games, @teams, @game_teams) end
 
   def highest_total_score
     @game_stats.highest_total_score end
@@ -84,14 +82,13 @@ class StatTracker
 
   def best_fans
     @league_stats.best_fans end
-  def worst_fan
+
+  def worst_fans
     @league_stats.worst_fans end
 
   def winningest_coach(season_param)
-    @season_stats.winningest_coach(season_param)
-  end
+    @season_stats.winningest_coach(season_param) end
 
   def worst_coach(season_param)
-    @season_stats.worst_coach(season_param)
-  end
+    @season_stats.worst_coach(season_param) end
 end
