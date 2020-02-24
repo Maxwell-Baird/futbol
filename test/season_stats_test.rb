@@ -17,6 +17,6 @@ class SeasonStatsTest < Minitest::Test
   end
 
   def test_winningest_coach
-    assert_equal "Bruce Boudreau", @season_stats.winningest_coach(20142015)
+    assert_equal "Bruce Boudreau", @season_stats.winningest_coach("20142015")
   end
 end
