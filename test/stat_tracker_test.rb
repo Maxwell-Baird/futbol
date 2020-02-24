@@ -123,5 +123,9 @@ class StatTrackerTest < Minitest::Test
     @stat_tracker.games.each do |game|
       assert_equal game.game_id[0..3], game.season[0..3]
     end
+
+  def test_it_can_name_winningest_coach
+    assert_equal "Bruce Boudreau", @season_stats.winningest_coach("20142015")
+  end
   end
 end
