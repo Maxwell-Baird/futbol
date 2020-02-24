@@ -21,7 +21,7 @@ class StatTracker
     @game_teams = csv_data(locations[:game_teams], GameTeam)
     @game_stats = GameStats.new(@games)
     @league_stats = LeagueStats.new(@games, @teams, @game_teams)
-    @season_stats = SeasonStats.new(@games, @game_teams, @teams)
+    @season_stats = SeasonStats.new(@games, @teams, @game_teams)
     @team_stats = TeamStats.new(@games, @game_teams, @teams)
   end
 
@@ -107,5 +107,13 @@ class StatTracker
 
   def worst_fans
     @league_stats.worst_fans
+  end
+
+  def biggest_bust(season_id)
+    @season_stats.biggest_bust(season_id)
+  end
+
+  def biggest_surprise(season_id)
+    @season_stats.biggest_surprise(season_id)
   end
 end
