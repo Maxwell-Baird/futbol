@@ -15,4 +15,12 @@ class SeasonStatsTest < Minitest::Test
     @stat_tracker = StatTracker.from_csv(@locations)
     @season_stats = SeasonStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
   end
+
+  def test_winningest_coach
+    assert_equal "Bruce Boudreau", @season_stats.winningest_coach("20142015")
+  end
+
+  def test_worst_coach
+    assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
+  end
 end
