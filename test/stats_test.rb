@@ -20,4 +20,8 @@ class StatsTest < Minitest::Test
     assert_equal @teams, @stats.teams
     assert_equal @game_teams, @stats.game_teams
   end
+
+  def test_it_can_return_all_games_in_a_season
+    # add test with mock/stub
+  end
 end

@@ -6,4 +6,10 @@ class Stats
     @teams = teams
     @game_teams = game_teams
   end
+
+  def season_game_teams(season_param)
+    @game_teams.select do |game_team|
+      (game_team.game_id/1000000).to_s == season_param[0..3]
+    end
+  end
 end

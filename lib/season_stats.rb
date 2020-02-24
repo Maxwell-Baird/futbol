@@ -6,10 +6,7 @@ class SeasonStats < Stats
   end
 
   def winningest_coach(season_param)
-    season_games = @game_teams.select do |game_team|
-      # look into not changing game_id into an integer in GameTeam#initialize
-      (game_team.game_id/1000000).to_s == season_param[0..3]
-    end
+    season_games = season_game_teams(season_param)
 
     win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
 
@@ -28,10 +25,7 @@ class SeasonStats < Stats
   end
 
   def worst_coach(season_param)
-    season_games = @game_teams.select do |game_team|
-      # look into not changing game_id into an integer in GameTeam#initialize
-      (game_team.game_id/1000000).to_s == season_param[0..3]
-    end
+    season_games = season_game_teams(season_param)
 
     win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
 
