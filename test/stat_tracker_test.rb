@@ -130,6 +130,6 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_name_worst_coach
-    assert_equal x, @stat_tracker.worst_coach("20142015")
+    assert_equal "Darryl Sutter", @stat_tracker.worst_coach("20142015")
   end
 end
