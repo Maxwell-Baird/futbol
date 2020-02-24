@@ -21,8 +21,8 @@ class StatTracker
     @game_teams = csv_data(locations[:game_teams], GameTeam)
     @game_stats = GameStats.new(@games)
     @league_stats = LeagueStats.new(@games, @teams, @game_teams)
-    @season_stats = SeasonStats.new(@games, @game_teams, @teams)
-    @team_stats = TeamStats.new(@games, @game_teams, @teams)
+    @season_stats = SeasonStats.new(@games, @teams, @game_teams)
+    @team_stats = TeamStats.new(@games, @teams, @game_teams)
   end
 
   def highest_total_score
@@ -107,5 +107,13 @@ class StatTracker
 
   def worst_fans
     @league_stats.worst_fans
+  end
+
+  def winningest_coach(season_param)
+    @season_stats.winningest_coach(season_param)
+  end
+
+  def worst_coach(season_param)
+    @season_stats.worst_coach(season_param)
   end
 end
