@@ -14,11 +14,4 @@ class SeasonStats < Stats
      team_with_fewest = @game_teams.min_by { |team| team.tackles }
     find_name(team_with_fewest.team_id)
   end
-
-#Helper Method
-#We tend to use this one a lot
-  def find_name(id)
-    team = @teams.find { |team| team.team_id == id }
-    team.teamname
-  end
 end

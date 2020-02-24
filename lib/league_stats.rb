@@ -82,11 +82,6 @@ class LeagueStats < Stats
   end
 
 # Helper Methods
-  def find_name(id)
-    team = @teams.find { |team| team.team_id == id }
-    team.teamname
-  end
-
   def unique_team_ids
     @game_teams.uniq { |game_team| game_team.team_id}.map { |game_team| game_team.team_id }
   end
