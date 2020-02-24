@@ -7,7 +7,8 @@ class SeasonStats < Stats
 
   def winningest_coach(season_param)
     season_games = @game_teams.select do |game_team|
-      game_team.game_id/1000000 == season_param/10000
+      # look into changing game_id and season back to strings
+      (game_team.game_id/1000000).to_s == season_param[0..3]
     end
 
     win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
