@@ -224,20 +224,18 @@ class LeagueStats < Stats
     end
   end
 
-
-
   def total_games_by_team_id(team_id)
     games_by_team(team_id).length
   end
 
   def average_defense
     #iterate of defense helper to take key and pass into games by team _id and value into what Im diving by.
-
-    defense_helper.each do |key, value|
-      (value.to_f / total_games_by_team_id(key)).round(2)
-
-
+x = {}
+  defense_helper.each do |key, value|
+      x[key] = total_games_by_team_id(key) / value.to_f
     end
+    x
+    require "pry"; binding.pry
   end
 end
 
