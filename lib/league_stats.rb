@@ -116,17 +116,15 @@ class LeagueStats < Stats
 
   def home_games
     @game_teams.select { |game_team| game_team.hoa == "home" } end
-    
+
   def percent_differences
     home_win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
-
     home_games.each do |home_game|
       if home_game.result == "WIN"
         home_win_ratios[home_game.team_id][0] += 1
       end
       home_win_ratios[home_game.team_id][1] += 1
     end
-
     home_win_percentages = home_win_ratios.each_with_object(Hash.new) do |(team_id, home_win_ratio), home_win_percentages|
       home_win_percentages[team_id] = home_win_ratio[0].fdiv(home_win_ratio[1]) * 100
     end
