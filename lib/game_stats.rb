@@ -10,7 +10,7 @@ class GameStats < Stats
   end
 
   def highest_total_score
-    @games.map { |game| game.away_goals + game.home_goals }.max
+    total("away_goals", "home_goals", @games).max
   end
 
   def lowest_total_score
@@ -28,7 +28,7 @@ class GameStats < Stats
   def percentage_visitor_wins
     round(vistor_wins.length.to_f / @games.length)
   end
-  
+
   def percentage_ties
     ties = @games.count do |game|
       game.away_goals == game.home_goals
