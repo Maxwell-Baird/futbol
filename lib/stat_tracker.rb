@@ -93,7 +93,6 @@ class StatTracker
     @season_stats.worst_coach(season_param) end
 
   def most_tackles(season_param)
-    require "pry"; binding.pry
     @season_stats.most_tackles(season_param)
   end
 

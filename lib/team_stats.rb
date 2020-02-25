@@ -5,7 +5,6 @@ class TeamStats < Stats
     super(games, teams, game_teams)
   end
 
-
   def team_info(team_id)
     {
       "team_id" => team_id,
