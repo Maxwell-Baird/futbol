@@ -12,8 +12,10 @@ class SeasonStats < Stats
   end
 
   def most_tackles(season_param)
-    season_games = season_game_teams(season_param).max_by { |team| team.tackles }
-    find_name(season_games.team_id)
+    season_game_teams(season_param).max_by do  |team|
+      require "pry"; binding.pry
+      team.tackles
+    end
   end
 
   def fewest_tackles(season_param)
