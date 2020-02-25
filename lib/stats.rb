@@ -7,6 +7,18 @@ class Stats
     @game_teams = game_teams
   end
 
+  def games_by_team(team_id)
+    @game_teams.find_all { |team| team.team_id == team_id }
+  end
+
+  def total_goals_by_team_id(team_id)
+    games_by_team(team_id).sum { |game_team| game_team.goals }
+  end
+
+  def total_shots_by_team_id(team_id)
+    games_by_team(team_id).sum { |game_team| game_team.shots }
+  end
+
   def season_game_teams(season_param)
     @game_teams.select do |game_team|
       (game_team.game_id/1000000).to_s == season_param[0..3]
