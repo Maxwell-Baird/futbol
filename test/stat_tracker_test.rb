@@ -87,7 +87,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_worst_defense
-    assert_equal "New York City FC", @stat_tracker.worst_defense
+    assert_equal "Sporting Kansas City", @stat_tracker.worst_defense
   end
 
   def test_it_can_return_highest_scoring_visitor
@@ -142,5 +142,13 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_return_biggest_team_blowout
     assert_equal 2, @stat_tracker.biggest_team_blowout("3")
+  end
+
+  def test_it_returns_name_of_team_with_most_tackles
+    assert_equal "Houston Dynamo", @stat_tracker.most_tackles("20132014")
+  end
+
+  def test_it_returns_name_of_team_with_fewest_tackles
+    assert_equal "Atlanta United", @stat_tracker.fewest_tackles("20132014")
   end
 end
