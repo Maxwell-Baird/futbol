@@ -1,8 +1,8 @@
 require_relative 'test_helper'
-require './lib/team_stats'
+require './lib/season_stats'
 require './lib/stat_tracker'
 
-class TeamStatsTest < Minitest::Test
+class SeasonStatsTest < Minitest::Test
   def setup
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
@@ -13,6 +13,14 @@ class TeamStatsTest < Minitest::Test
                 game_teams: game_teams_path
               }
     @stat_tracker = StatTracker.from_csv(@locations)
-    @team_stats = TeamStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
+    @season_stats = SeasonStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
+  end
+
+  def test_winningest_coach
+    assert_equal "Bruce Boudreau", @season_stats.winningest_coach("20142015")
+  end
+
+  def test_worst_coach
+    assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
   end
 end
