@@ -31,19 +31,19 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_highest_total_score
-    assert_equal 6, @stat_tracker.highest_total_score
+    assert_equal 5, @stat_tracker.highest_total_score
   end
 
   def test_it_can_return_lowest_total_score
-    assert_equal 3, @stat_tracker.lowest_total_score
+    assert_equal 1, @stat_tracker.lowest_total_score
   end
 
   def test_it_can_return_biggest_blowout
-    assert_equal 2, @stat_tracker.biggest_blowout
+    assert_equal 3, @stat_tracker.biggest_blowout
   end
 
   def test_it_can_return_percentage_home_wins
-    assert_equal 0.57, @stat_tracker.percentage_home_wins
+    assert_equal 0.67, @stat_tracker.percentage_home_wins
   end
 
   def test_it_can_return_percentage_visitor_wins
@@ -51,21 +51,21 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_percentage_ties
-    assert_equal 0.14, @stat_tracker.percentage_ties
+    assert_equal 0.05, @stat_tracker.percentage_ties
   end
 
   def test_it_can_return_count_number_of_games_by_season
-    expected = {"20152016"=>3, "20132014"=>2, "20142015"=>1, "20162017"=>1}
+    expected = {"20122013"=>21}
 
     assert_equal expected, @stat_tracker.count_of_games_by_season
   end
 
   def test_it_can_return_average_goals_per_game
-    assert_equal 4.71, @stat_tracker.average_goals_per_game
+    assert_equal 3.81, @stat_tracker.average_goals_per_game
   end
 
   def test_it_can_return_average_goals_by_season
-    expected = {"20152016"=>5.33, "20132014"=>5.0, "20142015"=>3.0, "20162017"=>4.0}
+    expected = {"20122013"=>3.81}
 
     assert_equal expected, @stat_tracker.average_goals_by_season
   end
@@ -83,11 +83,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_best_defense
-    assert_equal "Orlando City SC", @stat_tracker.best_defense
+    assert_equal "Houston Dynamo", @stat_tracker.best_defense
   end
 
   def test_it_can_return_worst_defense
-    assert_equal "Sky Blue FC", @stat_tracker.worst_defense
+    assert_equal "New York City FC", @stat_tracker.worst_defense
   end
 
   def test_it_can_return_highest_scoring_visitor
@@ -107,7 +107,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_winningest_team
-    assert_equal "Portland Timbers", @stat_tracker.winningest_team
+    assert_equal "FC Dallas", @stat_tracker.winningest_team
   end
 
   def test_it_can_return_best_fans

@@ -43,11 +43,11 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_best_defense
-    assert_equal "Orlando City SC", @league_stats.best_defense
+    assert_equal "Houston Dynamo", @league_stats.best_defense
   end
 
   def test_worst_defense
-    assert_equal "Sky Blue FC", @league_stats.worst_defense
+    assert_equal "New York City FC", @league_stats.worst_defense
   end
 
   def test_highest_scoring_visitor
@@ -67,18 +67,7 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_returns_winningest_team
-      game_path = './data/games_truncated_with_winningest_team.csv'
-      team_path = './data/teams.csv'
-      game_teams_path = './data/game_teams_truncated.csv'
-      locations = {
-                  games: game_path,
-                  teams: team_path,
-                  game_teams: game_teams_path
-                }
-      stat_tracker = StatTracker.from_csv(locations)
-      league_stats = LeagueStats.new(stat_tracker.games, stat_tracker.teams, stat_tracker.game_teams)
-
-    assert_equal "Atlanta United", league_stats.winningest_team
+    assert_equal "FC Dallas", @league_stats.winningest_team
   end
 
   def test_it_can_best_fans
@@ -150,7 +139,7 @@ class LeagueStatsTest < Minitest::Test
   def test_returns_home_id_and_away_goals
     #First object within each array is home_id.
     #Second object is total of of away_id_goals
-    expected = {5=>3, 26=>2, 17=>2, 30=>6, 12=>1, 18=>1}
+    expected = {6=>6, 3=>5, 5=>7, 16=>5, 17=>3, 8=>7, 9=>3}
 
     assert_equal expected, @league_stats.home_id_defense_stats
   end
@@ -158,22 +147,22 @@ class LeagueStatsTest < Minitest::Test
   def test_returns_away_id_and_home_goals
     #First object within each array is away_id.
     #Second object is total of of home_id_goals
-    expected = {15=>2, 3=>3, 7=>3, 22=>2, 10=>2, 53=>3, 25=>3}
+    expected = {3=>9, 6=>4, 5=>3, 17=>7, 16=>8, 9=>6, 8=>7}
 
     assert_equal expected, @league_stats.away_id_defense_stats
   end
 
   def test_defense_helper_returns_correct_hash
-    expected = {5=>3, 26=>2, 17=>2, 30=>6, 12=>1, 18=>1, 15=>2, 3=>3, 7=>3, 22=>2, 10=>2, 53=>3, 25=>3}
+    expected = {6=>10, 3=>14, 5=>10, 16=>13, 17=>10, 8=>14, 9=>9}
 
     assert_equal expected, @league_stats.defense_helper
   end
 
   def test_returns_best_defense
-    assert_equal "Orlando City SC", @league_stats.best_defense
+    assert_equal "Houston Dynamo", @league_stats.best_defense
   end
 
   def test_returns_worst_defense
-    assert_equal "Sky Blue FC", @league_stats.worst_defense
+    assert_equal "New York City FC", @league_stats.worst_defense
   end
 end
