@@ -1,16 +1,10 @@
 require_relative 'stats'
-require_relative 'compiler'
 
 class LeagueStats < Stats
-  include Compilable
-  extend Compilable
 
   def initialize(games, teams, game_teams)
     super(games, teams, game_teams)
   end
-
-  def count_of_teams
-    @teams.count end
 
   def best_offense
     find_name(unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) })
@@ -73,14 +67,6 @@ class LeagueStats < Stats
   end
 
 # Helper Methods
-  def find_name(id)
-    @teams.find { |team| team.team_id == id }.teamname
-  end
-
-  def unique_team_ids
-    @game_teams.uniq { |game_team| game_team.team_id}.map { |game_team| game_team.team_id }
-  end
-
   def scoring(hoa, wol)
     scoring_hash = {}
     @game_teams.each do |game_team|
@@ -161,26 +147,6 @@ class LeagueStats < Stats
     end
     percent_differences
   end
-
-  def average_goals_per_team(team_id)
-    total_goals_by_team_id(team_id).to_f / total_games_by_team_id(team_id).to_f
-  end
-
-  def total_goals_by_team_id(team_id)
-    games_by_team(team_id).sum { |game_team| game_team.goals } end
-
-  def total_shots_by_team_id(team_id)
-    games_by_team(team_id).sum { |game_team| game_team.shots } end
-
-  def shot_accuracy_by_team_id(team_id)
-    (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
-    .floor end
-
-  def games_by_team(team_id)
-    find_by_collection(team_id, "team_id", @game_teams) end
-
-  def total_games_by_team_id(team_id)
-    games_by_team(team_id).length end
 
   def home_id_defense_stats
     @games.group_by(&:home_team_id)
