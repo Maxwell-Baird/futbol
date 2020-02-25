@@ -1,12 +1,12 @@
 module Compilable
 
-  def find_all_arrays(collection, arg2)
-    collection.find_all { |bv| bv.send() == arg2 }
+  def find_by_collection(element, attribute, collection)
+    collection.find_all { |bv| bv.send(attribute) == element }
   end
 
-#change collection to be more specific
 
 
+#change collection to be more specif
 
   def total(collection, arg2, arg3: nil)
     collection.sum { |bv| arg2 }
@@ -24,8 +24,13 @@ module Compilable
   def find(arg1: nil, arg2: nil, arg3: nil)
     collection.find { |bv| bv.method == method }
   end
+
+
+  #different module
+
+  def round(method)
+    method.round(2)
+  end
+
+    
 end
-
-
-# most_accurate_team	Name of the Team with the best ratio of shots to goals for the season
-# least_accurate_team	Name of the Team with the worst ratio of shots to goals for the season
