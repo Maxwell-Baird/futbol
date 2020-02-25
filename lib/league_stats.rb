@@ -20,12 +20,15 @@ class LeagueStats < Stats
   end
 
   def best_defense
-    best_defense_id = defense_helper.max_by { |id, goals| goals }.first
+    best_defense_id = average_defense.min_by do |id, goals|
+      goals
+    end.first
+
     find_name(best_defense_id)
   end
 
   def worst_defense
-    worst_defense_id = defense_helper.min_by { |id, goals| goals }.first
+    worst_defense_id = average_defense.max_by { |id, goals| goals }.first
     find_name(worst_defense_id)
   end
 
@@ -204,10 +207,6 @@ class LeagueStats < Stats
     @game_teams.find_all { |team| team.team_id == team_id }
   end
 
-  def total_games_by_team_id(team_id)
-    games_by_team(team_id).length
-  end
-
   def home_id_defense_stats
     @games.group_by(&:home_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
@@ -224,4 +223,23 @@ class LeagueStats < Stats
       sums.merge(location) { |_, a, b| a + b }
     end
   end
+
+
+
+  def total_games_by_team_id(team_id)
+    games_by_team(team_id).length
+  end
+
+  def average_defense
+    #iterate of defense helper to take key and pass into games by team _id and value into what Im diving by.
+
+    defense_helper.each do |key, value|
+      (value.to_f / total_games_by_team_id(key)).round(2)
+
+
+    end
+  end
 end
+
+
+    #array with ids and average goals per games

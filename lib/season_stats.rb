@@ -6,7 +6,6 @@ class SeasonStats < Stats
     super(games, teams, game_teams)
   end
 
-
   def shot_accuracy_by_team_id(team_id)
     (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
     .round(2)
