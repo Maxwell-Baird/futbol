@@ -15,13 +15,6 @@ class SeasonStatsTest < Minitest::Test
     @stat_tracker = StatTracker.from_csv(@locations)
     @season_stats = SeasonStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
   end
-
-  def test_it_can_return_most_accurate_team
-    skip
-    assert_equal "the", @season_stats.most_accurate_team(20152016)
-  end
-
-
   # def test_it_can_return_least_accurate_team
   #   assert_equal "the", @season_stats.least_accurate_team(20142015)
   # end
@@ -35,15 +28,11 @@ class SeasonStatsTest < Minitest::Test
   end
 
   def test_it_can_biggest_bust
-    assert_equal "Washington Spirit FC", @season_stats.biggest_bust("20152016")
+    assert_equal "Philadelphia Union", @season_stats.biggest_bust("20122013")
   end
 
   def test_it_can_biggest_surprise
-    assert_equal "Orlando City SC", @season_stats.biggest_surprise("20152016")
+    assert_equal "Toronto FC", @season_stats.biggest_surprise("20122013")
   end
 
-  def test_it_can_difference_percentage
-    expected = { 22 => 1.0, 30 => 0.0}
-    assert_equal expected, @season_stats.difference_percentage("20152016")
-  end
 end

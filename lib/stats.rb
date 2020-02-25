@@ -11,6 +11,7 @@ class Stats
   def find_name(id)
     team = @teams.find { |team| team.team_id == id }
     team.teamname
+  end
 
   def games_by_team(team_id)
     @game_teams.find_all { |team| team.team_id == team_id }
@@ -22,7 +23,6 @@ class Stats
 
   def total_shots_by_team_id(team_id)
     games_by_team(team_id).sum { |game_team| game_team.shots }
-  end
   end
 
   def season_game_teams(season_param)

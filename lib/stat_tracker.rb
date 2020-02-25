@@ -87,12 +87,10 @@ class StatTracker
     @league_stats.worst_fans end
 
   def biggest_bust(season_id)
-    @season_stats.biggest_bust(season_id)
-  end
+    @season_stats.biggest_bust(season_id) end
 
   def biggest_surprise(season_id)
-    @season_stats.biggest_surprise(season_id)
-  end
+    @season_stats.biggest_surprise(season_id) end
 
   def winningest_coach(season_param)
     @season_stats.winningest_coach(season_param) end

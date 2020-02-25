@@ -26,7 +26,7 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_returns_highest_total_score
-    assert_equal 5, @game_stats.highest_total_score
+    assert_equal 7, @game_stats.highest_total_score
   end
 
   def test_returns_lowest_total_score
@@ -38,29 +38,29 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_calculate_percentage_home_wins
-    assert_equal 0.67, @game_stats.percentage_home_wins
+    assert_equal 0.55, @game_stats.percentage_home_wins
   end
 
   def test_it_can_calculate_percentage_vistor_wins
-    assert_equal 0.29, @game_stats.percentage_visitor_wins
+    assert_equal 0.33, @game_stats.percentage_visitor_wins
   end
 
   def test_it_can_calculate_percentage_ties
-    assert_equal 0.05, @game_stats.percentage_ties
+    assert_equal 0.12, @game_stats.percentage_ties
   end
 
   def test_it_can_count_games_by_season
-    expected = {"20122013"=>21}
+    expected = {"20122013"=>30, "20132014"=>3}
 
     assert_equal expected, @game_stats.count_of_games_by_season
   end
 
   def test_it_can_calculate_average_goals_per_game
-    assert_equal 3.81, @game_stats.average_goals_per_game
+    assert_equal 4.0, @game_stats.average_goals_per_game
   end
 
   def test_it_can_calculate_average_goals_per_season
-    expected = {"20122013"=>3.81}
+    expected = {"20122013"=>3.97, "20132014"=>4.33}
       assert_equal expected, @game_stats.average_goals_by_season
   end
 end
