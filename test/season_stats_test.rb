@@ -37,10 +37,9 @@ class SeasonStatsTest < Minitest::Test
     assert_equal "Atlanta United", @season_stats.fewest_tackles("20132014")
   end
 
-  def test_it_can_return_most_accurate_team
-    skip
-    assert_equal "the", @season_stats.most_accurate_team(20152016)
-  end
+  # def test_it_can_return_most_accurate_team
+  #   assert_equal "the", @season_stats.most_accurate_team(20152016)
+  # end
 
 
 
