@@ -69,7 +69,8 @@ class LeagueStats < Stats
       if percent_difference < 0
         team_names << find_name(team_id) end
     end
-    team_names end
+    team_names
+  end
 
 # Helper Methods
   def find_name(id)
@@ -113,12 +114,10 @@ class LeagueStats < Stats
     id['id'][0] = scoring_hash[key]
     id end
 
+  def home_games
+    @game_teams.select { |game_team| game_team.hoa == "home" } end
+    
   def percent_differences
-    # home results
-    home_games = @game_teams.select do |game_team|
-      game_team.hoa == "home"
-    end
-
     home_win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
 
     home_games.each do |home_game|
