@@ -134,4 +134,12 @@ class StatTrackerTest < Minitest::Test
   def test_it_can_name_worst_coach
     assert_equal "Darryl Sutter", @stat_tracker.worst_coach("20142015")
   end
+
+  def test_it_returns_name_of_team_with_most_tackles
+    assert_equal "Houston Dynamo", @stat_tracker.most_tackles("20132014")
+  end
+
+  def test_it_returns_name_of_team_with_fewest_tackles
+    assert_equal "Atlanta United", @stat_tracker.fewest_tackles("20132014")
+  end
 end
