@@ -81,6 +81,18 @@ class SeasonStats < Stats
     end
   end
 
+  def most_tackles(season_param)
+    season_games = season_game_teams(season_param).max_by { |team| team.tackles }
+    find_name(season_games.team_id)
+  end
+
+
+  def fewest_tackles(season_param)
+    season_games = season_game_teams(season_param).min_by { |team| team.tackles }
+    find_name(season_games.team_id)
+  end
+
+
   def winningest_coach(season_param)
     season_games = season_game_teams(season_param)
 
