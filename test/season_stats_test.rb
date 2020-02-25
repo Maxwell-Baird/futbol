@@ -42,7 +42,6 @@ class SeasonStatsTest < Minitest::Test
     assert_equal "the", @season_stats.most_accurate_team(20152016)
   end
 
-
   # def test_it_can_return_least_accurate_team
   #   assert_equal "the", @season_stats.least_accurate_team(20142015)
   # end
