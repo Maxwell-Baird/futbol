@@ -90,7 +90,6 @@ class StatTracker
     @season_stats.winningest_coach(season_param) end
 
   def worst_coach(season_param)
-<<<<<<< HEAD
     @season_stats.worst_coach(season_param)
   end
 
@@ -105,7 +104,7 @@ class StatTracker
   def biggest_team_blowout(team_param)
     @team_stats.biggest_team_blowout(team_param)
   end
-=======
+  
+  def worst_coach(season_param)
     @season_stats.worst_coach(season_param) end
->>>>>>> 007fd85e3c70889f308ab3e6572f9e6050e44f36
 end

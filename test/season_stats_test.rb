@@ -16,11 +16,9 @@ class SeasonStatsTest < Minitest::Test
     @season_stats = SeasonStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
   end
 
-  def test_it_can_return_most_accurate_team
-    skip
-    assert_equal "the", @season_stats.most_accurate_team(20152016)
-  end
-
+  # def test_it_can_return_most_accurate_team
+  #   assert_equal "the", @season_stats.most_accurate_team(20152016)
+  # end
 
   # def test_it_can_return_least_accurate_team
   #   assert_equal "the", @season_stats.least_accurate_team(20142015)

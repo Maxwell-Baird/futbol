@@ -119,9 +119,6 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_game_id_tracks_with_season
-    # this test is to prove that every game id tracks exactly with
-    # its season. E.g., game ids beginning with 2013 always have a
-    # season that begins with 2013.
     @stat_tracker.games.each do |game|
       assert_equal game.game_id[0..3], game.season[0..3]
     end
@@ -140,20 +137,10 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_name_a_rival_team
-    assert_equal "FC Cincinnati", @stat_tracker.rival("3")
+    assert_equal "FC Dallas", @stat_tracker.rival("3")
   end
 
   def test_it_can_return_biggest_team_blowout
-    game_path = './data/games_truncated_with_winningest_team.csv'
-    team_path = './data/teams.csv'
-    game_teams_path = './data/game_teams_truncated.csv'
-    locations = {
-                games: game_path,
-                teams: team_path,
-                game_teams: game_teams_path
-              }
-    stat_tracker = StatTracker.from_csv(locations)
-
-    assert_equal 2, stat_tracker.biggest_team_blowout("1")
+    assert_equal 2, @stat_tracker.biggest_team_blowout("3")
   end
 end
