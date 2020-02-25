@@ -1,6 +1,10 @@
 require_relative 'stats'
+require_relative 'compiler'
 
 class GameStats < Stats
+  include Compilable
+  extend Compilable
+
   def initialize(games)
     super(games, teams, game_teams)
   end
@@ -17,12 +21,14 @@ class GameStats < Stats
     @games.map { |game| (game.away_goals - game.home_goals).abs }.max
   end
 
-  def percentage_home_wins
-    home_wins = @games.find_all { |game| game.away_goals < game.home_goals }
-    sum = (home_wins.length).to_f / (@games.length).to_f
-    sum.round(2)
+  def home_wins
+    @games.find_all { |game| game.away_goals < game.home_goals }
   end
 
+  def percentage_home_wins
+    round(home_wins.length.to_f / @games.length)
+  end
+  
   def percentage_visitor_wins
     vistor_wins = @games.find_all { |game| game.away_goals > game.home_goals }
     sum = (vistor_wins.length).to_f / (@games.length).to_f
