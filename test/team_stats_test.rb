@@ -28,7 +28,7 @@ class TeamStatsTest < Minitest::Test
     stat_tracker = StatTracker.from_csv(locations)
     team_stats = TeamStats.new(stat_tracker.games, stat_tracker.teams, stat_tracker.game_teams)
 
-    assert_equal "Seattle Sounders FC", team_stats.favorite_opponent(3)
+    assert_equal "Seattle Sounders FC", team_stats.favorite_opponent("3")
   end
 
   def test_it_can_name_a_rival_team
@@ -43,7 +43,7 @@ class TeamStatsTest < Minitest::Test
     stat_tracker = StatTracker.from_csv(locations)
     team_stats = TeamStats.new(stat_tracker.games, stat_tracker.teams, stat_tracker.game_teams)
 
-    assert_equal "Atlanta United", team_stats.rival(3)
+    assert_equal "Atlanta United", team_stats.rival("3")
   end
 
   def test_it_can_return_biggest_team_blowout
@@ -58,6 +58,6 @@ class TeamStatsTest < Minitest::Test
     stat_tracker = StatTracker.from_csv(locations)
     team_stats = TeamStats.new(stat_tracker.games, stat_tracker.teams, stat_tracker.game_teams)
 
-    assert_equal 2, team_stats.biggest_team_blowout(1)
+    assert_equal 2, team_stats.biggest_team_blowout("1")
   end
 end

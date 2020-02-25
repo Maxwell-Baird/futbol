@@ -134,11 +134,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_name_a_favorite_oppponent_team
-    assert_equal "Houston Dynamo", @stat_tracker.favorite_opponent(3)
+    assert_equal "Houston Dynamo", @stat_tracker.favorite_opponent("3")
   end
 
   def test_it_can_name_a_rival_team
-    assert_equal "FC Cincinnati", @stat_tracker.rival(3)
+    assert_equal "FC Cincinnati", @stat_tracker.rival("3")
   end
 
   def test_it_can_return_biggest_team_blowout
@@ -152,6 +152,6 @@ class StatTrackerTest < Minitest::Test
               }
     stat_tracker = StatTracker.from_csv(locations)
 
-    assert_equal 2, stat_tracker.biggest_team_blowout(1)
+    assert_equal 2, stat_tracker.biggest_team_blowout("1")
   end
 end

@@ -8,7 +8,7 @@ class TeamStats < Stats
   def favorite_opponent(team_id)
     # find team that loses to this team most often
     games_with_team = @games.select do |game|
-      game.away_team_id == team_id || game.home_team_id == team_id
+      game.away_team_id == team_id.to_i || game.home_team_id == team_id.to_i
     end
 
     win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
@@ -37,7 +37,7 @@ class TeamStats < Stats
   def rival(team_id)
     # find team that wins against this team most often
     games_with_team = @games.select do |game|
-      game.away_team_id == team_id || game.home_team_id == team_id
+      game.away_team_id == team_id.to_i || game.home_team_id == team_id.to_i
     end
 
     win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
@@ -65,7 +65,7 @@ class TeamStats < Stats
 
   def biggest_team_blowout(team_id)
     games_with_team = @games.select do |game|
-      game.away_team_id == team_id || game.home_team_id == team_id
+      game.away_team_id == team_id.to_i || game.home_team_id == team_id.to_i
     end
 
     game_with_biggest_blowout = games_with_team.max_by do |game|
