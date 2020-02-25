@@ -10,44 +10,35 @@ class LeagueStats < Stats
   end
 
   def count_of_teams
-    @teams.count
-  end
+    @teams.count end
 
   def best_offense
-    best_offense_id = unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) }
-    find_name(best_offense_id)
+    find_name(unique_team_ids.max_by { |team_id| average_goals_per_team(team_id) })
   end
 
   def worst_offense
-    worst_offense_id = unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) }
-    find_name(worst_offense_id)
+    find_name(unique_team_ids.min_by { |team_id| average_goals_per_team(team_id) })
   end
 
   def best_defense
-    best_defense_id = defense_helper.max_by { |id, goals| goals }.first
-    find_name(best_defense_id)
+     find_name(defense_helper.max_by { |id, goals| goals }.first)
   end
 
   def worst_defense
-    worst_defense_id = defense_helper.min_by { |id, goals| goals }.first
-    find_name(worst_defense_id)
+    find_name(defense_helper.min_by { |id, goals| goals }.first)
   end
 
   def lowest_scoring_visitor
-    scoring('away','low')
-  end
+    scoring('away','low') end
 
   def lowest_scoring_home_team
-    scoring('home','low')
-  end
+    scoring('home','low') end
 
   def highest_scoring_visitor
-    scoring('away','win')
-  end
+    scoring('away','win') end
 
   def highest_scoring_home_team
-    scoring('home','win')
-  end
+    scoring('home','win') end
 
   def winningest_team
     win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
@@ -65,30 +56,24 @@ class LeagueStats < Stats
     win_percentages = win_ratios.each_with_object(Hash.new) do |(team_id, win_ratio), win_percent|
       win_percent[team_id] = win_ratio[0].fdiv(win_ratio[1]) * 100
     end
-
-    team_id = win_percentages.key(win_percentages.values.max)
-    find_name(team_id)
+    find_name(win_percentages.key(win_percentages.values.max))
   end
 
   def best_fans
-    team_id = percent_differences.key(percent_differences.values.max).to_i
-    find_name(team_id)
+    find_name(percent_differences.key(percent_differences.values.max).to_i)
   end
 
   def worst_fans
     team_names = []
     percent_differences.each do |team_id, percent_difference|
       if percent_difference < 0
-        team_names << find_name(team_id)
-      end
+        team_names << find_name(team_id) end
     end
-    team_names
-  end
+    team_names end
 
 # Helper Methods
   def find_name(id)
-    team_id = @teams.find { |team| team.team_id == id }
-    team_id.teamname
+    @teams.find { |team| team.team_id == id }.teamname
   end
 
   def unique_team_ids
@@ -99,23 +84,19 @@ class LeagueStats < Stats
     scoring_hash = {}
     @game_teams.each do |game_team|
       if game_team.hoa == hoa
-        update_scoring_hash(scoring_hash, game_team)
-      end
+        update_scoring_hash(scoring_hash, game_team) end
     end
     scoring_hash.each_key do |key|
       scoring_hash[key] = scoring_hash[key][0].to_f / scoring_hash[key][1].to_f
     end
-    find_name(low_or_high(wol, scoring_hash))
-  end
+    find_name(low_or_high(wol, scoring_hash)) end
 
   def update_scoring_hash(scoring_hash, game)
     if scoring_hash[game.team_id] == nil
-      scoring_hash[game.team_id] = [0,0]
-    end
+      scoring_hash[game.team_id] = [0,0] end
     scoring_hash[game.team_id][0] += game.goals.to_i
     scoring_hash[game.team_id][1] += 1
-    scoring_hash
-  end
+    scoring_hash end
 
   def low_or_high(wol, scoring_hash)
     id  = {'id' => [scoring_hash[scoring_hash.first.first], scoring_hash.first.first]}
@@ -123,17 +104,14 @@ class LeagueStats < Stats
       if id['id'][0] > scoring_hash[key] && wol == 'low'
         update_id(id, key, scoring_hash)
       elsif id['id'][0] < scoring_hash[key] && wol == 'win'
-        update_id(id, key, scoring_hash)
-      end
+        update_id(id, key, scoring_hash) end
     end
-    id['id'][1]
-  end
+    id['id'][1] end
 
   def update_id(id, key, scoring_hash)
     id['id'][1] = key.to_i
     id['id'][0] = scoring_hash[key]
-    id
-  end
+    id end
 
   def percent_differences
     # home results
@@ -192,25 +170,20 @@ class LeagueStats < Stats
   end
 
   def total_goals_by_team_id(team_id)
-    games_by_team(team_id).sum { |game_team| game_team.goals }
-  end
+    games_by_team(team_id).sum { |game_team| game_team.goals } end
 
   def total_shots_by_team_id(team_id)
-    games_by_team(team_id).sum { |game_team| game_team.shots }
-  end
+    games_by_team(team_id).sum { |game_team| game_team.shots } end
 
   def shot_accuracy_by_team_id(team_id)
     (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
-    .floor
-  end
+    .floor end
 
   def games_by_team(team_id)
-    find_by_collection(team_id, "team_id", @game_teams)
-  end
+    find_by_collection(team_id, "team_id", @game_teams) end
 
   def total_games_by_team_id(team_id)
-    games_by_team(team_id).length
-  end
+    games_by_team(team_id).length end
 
   def home_id_defense_stats
     @games.group_by(&:home_team_id)
