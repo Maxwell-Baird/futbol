@@ -124,4 +124,7 @@ class StatTracker
   def worst_coach(season_param)
     @season_stats.worst_coach(season_param)
   end
+
+  def head_to_head(team_id)
+    @team_stats.head_to_head(team_id) end
 end
