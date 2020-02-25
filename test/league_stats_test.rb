@@ -118,6 +118,7 @@ class LeagueStatsTest < Minitest::Test
 
   def test_game_teams_stats_low_or_high
     test_hash = {1 => 4.0, 2 => 5.5, 3 => 4.5}
+
     assert_equal 2, @league_stats.low_or_high('win', test_hash)
     assert_equal 1, @league_stats.low_or_high('low', test_hash)
   end
@@ -125,6 +126,7 @@ class LeagueStatsTest < Minitest::Test
   def test_game_teams_stats_update_scoring_hash
     scoring_hash = {}
     result = {6 => [3,1]}
+
     assert_equal result, @league_stats.update_scoring_hash(scoring_hash, @game_teams)
   end
 
@@ -133,20 +135,17 @@ class LeagueStatsTest < Minitest::Test
     key = 2
     test_hash = {1 => 4.0, 2 => 5.5, 3 => 4.5}
     expected = {'id' => [5.5, 2]}
+
     assert_equal expected, @league_stats.update_id(id, key, test_hash)
   end
 
   def test_returns_home_id_and_away_goals
-    #First object within each array is home_id.
-    #Second object is total of of away_id_goals
     expected = {6=>6, 3=>5, 5=>7, 16=>5, 17=>3, 8=>7, 9=>3}
 
     assert_equal expected, @league_stats.home_id_defense_stats
   end
 
   def test_returns_away_id_and_home_goals
-    #First object within each array is away_id.
-    #Second object is total of of home_id_goals
     expected = {3=>9, 6=>4, 5=>3, 17=>7, 16=>8, 9=>6, 8=>7}
 
     assert_equal expected, @league_stats.away_id_defense_stats
