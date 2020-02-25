@@ -4,12 +4,8 @@ module Compilable
     collection.find_all { |bv| bv.send(attribute) == element }
   end
 
-
-
-#change collection to be more specif
-
-  def total(collection, arg2, arg3: nil)
-    collection.sum { |bv| arg2 }
+  def total(attribute1, attribute2, collection)
+    collection.map { |bv| bv.send(attribute1) + bv.send(attribute2)}
   end
 
   def average(arg1, arg2)
@@ -32,5 +28,5 @@ module Compilable
     method.round(2)
   end
 
-    
+
 end
