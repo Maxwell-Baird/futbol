@@ -116,4 +116,16 @@ class StatTracker
   def worst_coach(season_param)
     @season_stats.worst_coach(season_param)
   end
+
+  def favorite_opponent(team_param)
+    @team_stats.favorite_opponent(team_param)
+  end
+
+  def rival(team_param)
+    @team_stats.rival(team_param)
+  end
+
+  def biggest_team_blowout(team_param)
+    @team_stats.biggest_team_blowout(team_param)
+  end
 end

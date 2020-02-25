@@ -72,6 +72,7 @@ class TeamStats < Stats
       (game.away_goals - game.home_goals).abs
     end
 
-    (game_with_biggest_blowout.away_goals - game_with_biggest_blowout.home_goals).abs
+    difference = game_with_biggest_blowout.away_goals - game_with_biggest_blowout.home_goals
+    difference.abs
   end
 end
