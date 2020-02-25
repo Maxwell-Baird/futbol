@@ -20,15 +20,12 @@ class LeagueStats < Stats
   end
 
   def best_defense
-    best_defense_id = average_defense.min_by do |id, goals|
-      goals
-    end.first
-
+    best_defense_id = average_defense.min_by { |key, value| value }.first
     find_name(best_defense_id)
   end
 
   def worst_defense
-    worst_defense_id = average_defense.max_by { |id, goals| goals }.first
+    worst_defense_id = average_defense.max_by { |key, value| values }.first
     find_name(worst_defense_id)
   end
 
@@ -229,15 +226,10 @@ class LeagueStats < Stats
   end
 
   def average_defense
-    #iterate of defense helper to take key and pass into games by team _id and value into what Im diving by.
-x = {}
-  defense_helper.each do |key, value|
+    average_defense = {}
+    defense_helper.each do |key, value|
       x[key] = total_games_by_team_id(key) / value.to_f
     end
-    x
-    require "pry"; binding.pry
+    average_defense
   end
 end
-
-
-    #array with ids and average goals per games
