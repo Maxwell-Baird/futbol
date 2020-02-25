@@ -30,12 +30,11 @@ class SeasonStatsTest < Minitest::Test
   end
 
   def test_it_returns_name_of_team_with_most_tackles
-    assert_equal "FC Dallas", @season_stats.most_tackles(20132014)
+    assert_equal "Houston Dynamo", @season_stats.most_tackles("20132014")
   end
 
   def test_it_returns_name_of_team_with_fewest_tackles
-    skip
-    assert_equal "Toronto FC", @season_stats.fewest_tackles
+    assert_equal "Atlanta United", @season_stats.fewest_tackles("20132014")
   end
 
   def test_winningest_coach
