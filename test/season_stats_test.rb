@@ -44,9 +44,20 @@ class SeasonStatsTest < Minitest::Test
     assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
   end
 
+
   def test_it_can_return_hash_with_shots_and_goals_per_team
     expected = {24=>0.375, 20=>0.5, 26=>0.16666666666666666}
 
-    assert_equal expected, @season_stats.shots_and_goals_per_team("20142015")  
+    assert_equal expected, @season_stats.shots_and_goals_per_team("20142015")
   end
+
+  def test_it_can_biggest_bust
+    assert_equal "Philadelphia Union", @season_stats.biggest_bust("20122013")
+  end
+
+  def test_it_can_biggest_surprise
+    assert_equal "Toronto FC", @season_stats.biggest_surprise("20122013")
+  end
+
+
 end

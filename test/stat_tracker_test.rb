@@ -31,7 +31,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_highest_total_score
-    assert_equal 5, @stat_tracker.highest_total_score
+    assert_equal 7, @stat_tracker.highest_total_score
   end
 
   def test_it_can_return_lowest_total_score
@@ -43,29 +43,29 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_percentage_home_wins
-    assert_equal 0.67, @stat_tracker.percentage_home_wins
+    assert_equal 0.55, @stat_tracker.percentage_home_wins
   end
 
   def test_it_can_return_percentage_visitor_wins
-    assert_equal 0.29, @stat_tracker.percentage_visitor_wins
+    assert_equal 0.33, @stat_tracker.percentage_visitor_wins
   end
 
   def test_it_can_return_percentage_ties
-    assert_equal 0.05, @stat_tracker.percentage_ties
+    assert_equal 0.12, @stat_tracker.percentage_ties
   end
 
   def test_it_can_return_count_number_of_games_by_season
-    expected = {"20122013"=>21}
+    expected = {"20122013"=>30, "20132014"=>3}
 
     assert_equal expected, @stat_tracker.count_of_games_by_season
   end
 
   def test_it_can_return_average_goals_per_game
-    assert_equal 3.81, @stat_tracker.average_goals_per_game
+    assert_equal 4.0, @stat_tracker.average_goals_per_game
   end
 
   def test_it_can_return_average_goals_by_season
-    expected = {"20122013"=>3.81}
+    expected = {"20122013"=>3.97, "20132014"=>4.33}
 
     assert_equal expected, @stat_tracker.average_goals_by_season
   end
@@ -83,7 +83,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_best_defense
-    assert_equal "Houston Dynamo", @stat_tracker.best_defense
+    assert_equal "Toronto FC", @stat_tracker.best_defense
   end
 
   def test_it_can_return_worst_defense
@@ -119,9 +119,6 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_game_id_tracks_with_season
-    # this test is to prove that every game id tracks exactly with
-    # its season. E.g., game ids beginning with 2013 always have a
-    # season that begins with 2013.
     @stat_tracker.games.each do |game|
       assert_equal game.game_id[0..3], game.season[0..3]
     end
@@ -133,6 +130,25 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_name_worst_coach
     assert_equal "Darryl Sutter", @stat_tracker.worst_coach("20142015")
+  end
+  def test_it_can_biggest_bust
+    assert_equal "Philadelphia Union", @stat_tracker.biggest_bust('20122013')
+  end
+
+  def test_it_can_biggest_surprise
+    assert_equal "Toronto FC", @stat_tracker.biggest_surprise('20122013')
+  end
+
+  def test_it_can_name_a_favorite_oppponent_team
+    assert_equal "Houston Dynamo", @stat_tracker.favorite_opponent("3")
+  end
+
+  def test_it_can_name_a_rival_team
+    assert_equal "FC Dallas", @stat_tracker.rival("3")
+  end
+
+  def test_it_can_return_biggest_team_blowout
+    assert_equal 2, @stat_tracker.biggest_team_blowout("3")
   end
 
   def test_it_returns_name_of_team_with_most_tackles

@@ -86,8 +86,23 @@ class StatTracker
   def worst_fans
     @league_stats.worst_fans end
 
+  def biggest_bust(season_id)
+    @season_stats.biggest_bust(season_id) end
+
+  def biggest_surprise(season_id)
+    @season_stats.biggest_surprise(season_id) end
+
   def winningest_coach(season_param)
     @season_stats.winningest_coach(season_param) end
+
+  def favorite_opponent(team_param)
+    @team_stats.favorite_opponent(team_param) end
+
+  def rival(team_param)
+    @team_stats.rival(team_param) end
+
+  def biggest_team_blowout(team_param)
+    @team_stats.biggest_team_blowout(team_param) end
 
   def worst_coach(season_param)
     @season_stats.worst_coach(season_param) end
@@ -98,11 +113,16 @@ class StatTracker
   def fewest_tackles(season_param)
     @season_stats.fewest_tackles(season_param) end
 
+
   def most_accurate_team(season_param)
     @season_stats.most_accurate_team(season_param)
   end
-  
+
   def least_accurate_team(season_param)
     @season_stats.least_accurate_team(season_param)
   end
+
+  def worst_loss(team_id)
+    @team_stats.worst_loss(team_id) end
+
 end
