@@ -21,20 +21,14 @@ class GameStats < Stats
     @games.map { |game| (game.away_goals - game.home_goals).abs }.max
   end
 
-  def home_wins
-    @games.find_all { |game| game.away_goals < game.home_goals }
-  end
-
   def percentage_home_wins
     round(home_wins.length.to_f / @games.length)
   end
-  
-  def percentage_visitor_wins
-    vistor_wins = @games.find_all { |game| game.away_goals > game.home_goals }
-    sum = (vistor_wins.length).to_f / (@games.length).to_f
-    sum.round(2)
-  end
 
+  def percentage_visitor_wins
+    round(vistor_wins.length.to_f / @games.length)
+  end
+  
   def percentage_ties
     ties = @games.count do |game|
       game.away_goals == game.home_goals
@@ -70,5 +64,14 @@ class GameStats < Stats
       average_goals[game.season] = (goals_per_season[game.season].to_f / count[game.season]).round(2)
       average_goals
     end
+  end
+
+  #helper methods
+  def home_wins
+    @games.find_all { |game| game.away_goals < game.home_goals }
+  end
+
+  def vistor_wins
+    @games.find_all { |game| game.away_goals > game.home_goals }
   end
 end
