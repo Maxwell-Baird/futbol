@@ -164,4 +164,8 @@ class LeagueStatsTest < Minitest::Test
   def test_returns_worst_defense
     assert_equal "New York City FC", @league_stats.worst_defense
   end
+
+  def test_returns_average_defense
+    @league_stats.average_defense
+  end 
 end
