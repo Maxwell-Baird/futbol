@@ -11,17 +11,23 @@ class SeasonStats < Stats
     .round(2)
   end
 
+  def most_accurate_team(season_id)
+    find_name(season_game_teams(season_id).max_by { |game| shot_accuracy_by_team_id(game.team_id)}.team_id)
+  end
+
+  def least_accurate_team(season_id)
+    find_name(season_game_teams(season_id).min_by {|game| shot_accuracy_by_team_id(game.team_id)}.team_id)
+  end
+
   def most_tackles(season_param)
     season_games = season_game_teams(season_param).max_by { |team| team.tackles }
     find_name(season_games.team_id)
   end
 
-
   def fewest_tackles(season_param)
     season_games = season_game_teams(season_param).min_by { |team| team.tackles }
     find_name(season_games.team_id)
   end
-
 
   def winningest_coach(season_param)
     season_games = season_game_teams(season_param)
@@ -60,5 +66,4 @@ class SeasonStats < Stats
 
     win_percentages.key(win_percentages.values.min)
   end
-
 end
