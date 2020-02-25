@@ -5,7 +5,6 @@ class SeasonStats < Stats
   def initialize(games, teams, game_teams)
     super(games, teams, game_teams)
   end
-
   def shot_accuracy_by_team_id(team_id)
     round(total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
   end
@@ -16,7 +15,7 @@ class SeasonStats < Stats
   # def least_accurate_team(season_id)
   #   # Name of the Team with the worst ratio of shots to goals for the season
   # end
-  
+
 #   def shot_accuracy_by_team_id(team_id)
 #     (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
 #     .floor
