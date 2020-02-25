@@ -164,4 +164,16 @@ class LeagueStats < Stats
       sums.merge(location) { |_, a, b| a + b }
     end
   end
+
+  def total_games_by_team_id(team_id)
+    games_by_team(team_id).length
+  end
+
+  def average_defense
+    average_defense = {}
+    defense_helper.each do |key, value|
+      average_defense[key] = total_games_by_team_id(key) / value.to_f
+    end
+    average_defense
+  end
 end
