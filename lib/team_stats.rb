@@ -64,15 +64,51 @@ class TeamStats < Stats
   end
 
   def biggest_team_blowout(team_id)
-    games_with_team = @games.select do |game|
-      game.away_team_id == team_id.to_i || game.home_team_id == team_id.to_i
+    wins_as_home = @games.select do |game|
+      game.home_team_id == team_id.to_i &&
+      game.home_goals > game.away_goals
+    end
+    home_blowout_game = wins_as_home.max_by do |game|
+      game.home_goals - game.away_goals
+    end
+    home_blowout = home_blowout_game.home_goals - home_blowout_game.away_goals
+    wins_as_away_team = @games.select do |game|
+      game.away_team_id == team_id.to_i &&
+      game.away_goals > game.home_goals
     end
 
-    game_with_biggest_blowout = games_with_team.max_by do |game|
-      (game.away_goals - game.home_goals).abs
+    away_blowout_game = wins_as_away_team.max_by do |game|
+      game.away_goals - game.home_goals
     end
+    away_blowout = away_blowout_game.away_goals - away_blowout_game.home_goals
+    [away_blowout, home_blowout].max
+  end
 
-    difference = game_with_biggest_blowout.away_goals - game_with_biggest_blowout.home_goals
-    difference.abs
+  def most_goals_scored(team_id)
+    most = 0
+    games.each do |game|
+      if team_id == game.home_team_id
+        if game.home_goals > most
+          most = game.home_goals
+        end
+      else
+        if game.away_goals > most
+          most = game.away_goals
+        end end end
+    most
+  end
+
+  def fewest_goals_scored(team_id)
+    few = 0
+    games.each do |game|
+      if team_id == game.home_team_id
+        if game.home_goals < few
+          few = game.home_goals
+        end
+      else
+        if game.away_goals < few
+          few = game.away_goals
+        end end end
+    few
   end
 end
