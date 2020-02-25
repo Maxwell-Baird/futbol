@@ -72,12 +72,6 @@ class TeamStats < Stats
       (game.away_goals - game.home_goals).abs
     end
 
-    if game_with_biggest_blowout.home_team_id == team_id
-      team_id = game_with_biggest_blowout.away_team_id
-    else
-      team_id = game_with_biggest_blowout.home_team_id
-    end
-
-    find_name(team_id)
+    (game_with_biggest_blowout.away_goals - game_with_biggest_blowout.home_goals).abs
   end
 end
