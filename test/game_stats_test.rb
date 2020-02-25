@@ -60,7 +60,7 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_calculate_average_goals_per_game
-    assert_equal 4.71, @game_stats.average_goals_per_game
+    assert_equal 3.81, @game_stats.average_goals_per_game
   end
 
   def test_it_can_calculate_average_goals_per_season
