@@ -58,6 +58,6 @@ class TeamStatsTest < Minitest::Test
     stat_tracker = StatTracker.from_csv(locations)
     team_stats = TeamStats.new(stat_tracker.games, stat_tracker.teams, stat_tracker.game_teams)
 
-    assert_equal "Seattle Sounders FC", team_stats.biggest_team_blowout(1)
+    assert_equal "Houston Dynamo", team_stats.biggest_team_blowout(1)
   end
 end
