@@ -106,6 +106,14 @@ class LeagueStatsTest < Minitest::Test
     assert_equal 1, @league_stats.total_games_by_team_id(1)
   end
 
+  def test_total_shots_by_team_id
+    assert_equal 6, @league_stats.total_shots_by_team_id(1)
+  end
+
+  def test_shot_accuracy_by_team_id
+    assert_equal 33, @league_stats.shot_accuracy_by_team_id(1)
+  end
+
   def test_total_goals_by_team_id
     assert_equal 2, @league_stats.total_goals_by_team_id(1)
   end

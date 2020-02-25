@@ -83,8 +83,8 @@ class LeagueStats < Stats
 
 # Helper Methods
   def find_name(id)
-    team = @teams.find { |team| team.team_id == id }
-    team.teamname
+    team_id = @teams.find { |team| team.team_id == id }
+    team_id.teamname
   end
 
   def unique_team_ids
@@ -191,6 +191,15 @@ class LeagueStats < Stats
     games_by_team(team_id).sum { |game_team| game_team.goals }
   end
 
+  def total_shots_by_team_id(team_id)
+    games_by_team(team_id).sum { |game_team| game_team.shots }
+  end
+
+  def shot_accuracy_by_team_id(team_id)
+    (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
+    .floor
+  end
+
   def games_by_team(team_id)
     @game_teams.find_all { |team| team.team_id == team_id }
   end
@@ -198,7 +207,6 @@ class LeagueStats < Stats
   def total_games_by_team_id(team_id)
     games_by_team(team_id).length
   end
-
 
   def home_id_defense_stats
     @games.group_by(&:home_team_id)
@@ -211,8 +219,8 @@ class LeagueStats < Stats
   end
 
   def defense_helper
-    defense_stats = home_id_defense_stats, away_id_defense_stats
-    defense_stats.reduce({}) do |sums, location|
+    combined_stats = home_id_defense_stats, away_id_defense_stats
+    combined_stats.reduce({}) do |sums, location|
       sums.merge(location) { |_, a, b| a + b }
     end
   end
