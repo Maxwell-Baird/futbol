@@ -104,4 +104,7 @@ class StatTracker
   def fewest_tackles(season_param)
     @season_stats.fewest_tackles(season_param) end
 
+  def worst_loss(team_id)
+    @team_stats.worst_loss(team_id) end
+
 end
