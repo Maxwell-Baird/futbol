@@ -42,6 +42,7 @@ class SeasonStatsTest < Minitest::Test
   # end
 
 
+
   # def test_it_can_return_least_accurate_team
   #   assert_equal "the", @season_stats.least_accurate_team(20142015)
   # end
@@ -53,4 +54,13 @@ class SeasonStatsTest < Minitest::Test
   def test_worst_coach
     assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
   end
+
+  def test_it_can_biggest_bust
+    assert_equal "Philadelphia Union", @season_stats.biggest_bust("20122013")
+  end
+
+  def test_it_can_biggest_surprise
+    assert_equal "Toronto FC", @season_stats.biggest_surprise("20122013")
+  end
+
 end
