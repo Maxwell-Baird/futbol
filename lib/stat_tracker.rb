@@ -91,4 +91,12 @@ class StatTracker
 
   def worst_coach(season_param)
     @season_stats.worst_coach(season_param) end
+
+  def most_tackles(season_param)
+    @season_stats.most_tackles(season_param) end
+
+  def fewest_tackles(season_param)
+    @season_stats.fewest_tackles(season_param) end
+
+
 end

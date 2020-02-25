@@ -7,7 +7,6 @@ class StatsTest < Minitest::Test
     @games = mock('games')
     @teams = mock('teams')
     @game_teams = mock('game_teams')
-
     @stats = Stats.new(@games, @teams, @game_teams)
   end
 
@@ -21,7 +20,7 @@ class StatsTest < Minitest::Test
     assert_equal @game_teams, @stats.game_teams
   end
 
-  def test_it_can_return_all_games_in_a_season
-    # add test with mock/stub
+  def test_it_can_find_name
+  # Test goes here
   end
 end

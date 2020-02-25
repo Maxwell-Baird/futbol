@@ -7,6 +7,11 @@ class Stats
     @game_teams = game_teams
   end
 
+  def find_name(id)
+    team = @teams.find { |team| team.team_id == id }
+    team.teamname
+  end
+
   def games_by_team(team_id)
     @game_teams.find_all { |team| team.team_id == team_id }
   end
