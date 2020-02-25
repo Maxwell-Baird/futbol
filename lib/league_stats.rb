@@ -1,6 +1,10 @@
 require_relative 'stats'
+require_relative 'compiler'
 
 class LeagueStats < Stats
+  include Compilable
+  extend Compilable
+
   def initialize(games, teams, game_teams)
     super(games, teams, game_teams)
   end
@@ -201,7 +205,7 @@ class LeagueStats < Stats
   end
 
   def games_by_team(team_id)
-    @game_teams.find_all { |team| team.team_id == team_id }
+    find_by_collection(team_id, "team_id", @game_teams)
   end
 
   def total_games_by_team_id(team_id)
