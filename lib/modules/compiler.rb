@@ -20,7 +20,7 @@ module Compilable
 
   def percentage(arg1, arg2, arg3)
     #expected .45% instead of 45%
-    ((arg1.length / arg2.to_f) * 100).round(2)
+    round((arg1.length / arg2.to_f))
   end
 
   def find(arg1, arg2, arg3)
