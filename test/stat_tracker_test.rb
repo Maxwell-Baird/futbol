@@ -34,10 +34,6 @@ class StatTrackerTest < Minitest::Test
     assert_equal 6, @stat_tracker.highest_total_score
   end
 
-  def test_it_can_biggest_bust
-    assert_equal 0, @stat_tracker.biggest_bust('20152016')
-  end
-
   def test_it_can_lowest_total_score
     assert_equal 3, @stat_tracker.lowest_total_score
   end
@@ -135,5 +131,13 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_name_worst_coach
     assert_equal "Darryl Sutter", @stat_tracker.worst_coach("20142015")
+  end
+
+  def test_it_can_biggest_bust
+    assert_equal "Washington Spirit FC", @stat_tracker.biggest_bust('20152016')
+  end
+
+  def test_it_can_biggest_surprise
+    assert_equal "Sky Blue FC", @stat_tracker.biggest_bust('20142015')
   end
 end

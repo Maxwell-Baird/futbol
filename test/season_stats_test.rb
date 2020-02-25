@@ -23,4 +23,17 @@ class SeasonStatsTest < Minitest::Test
   def test_worst_coach
     assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
   end
+
+  def test_it_can_biggest_bust
+    assert_equal "Washington Spirit FC", @season_stats.biggest_bust("20152016")
+  end
+
+  def test_it_can_biggest_surprise
+    assert_equal "Orlando City SC", @season_stats.biggest_surprise("20152016")
+  end
+
+  def test_it_can_difference_percentage
+    expected = { 22 => 1.0, 30 => 0.0}
+    assert_equal expected, @season_stats.difference_percentage("20152016")
+  end
 end

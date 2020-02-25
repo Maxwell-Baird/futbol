@@ -10,7 +10,7 @@ class Stats
   def find_name(id)
     team = @teams.find { |team| team.team_id == id }
     team.teamname
-
+  end
 
   def season_game_teams(season_param)
     @game_teams.select do |game_team|

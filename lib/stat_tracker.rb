@@ -22,11 +22,7 @@ class StatTracker
     @game_stats = GameStats.new(@games)
     @league_stats = LeagueStats.new(@games, @teams, @game_teams)
     @season_stats = SeasonStats.new(@games, @teams, @game_teams)
-<<<<<<< HEAD
-    @team_stats = TeamStats.new(@games, @game_teams, @teams)
-=======
     @team_stats = TeamStats.new(@games, @teams, @game_teams)
->>>>>>> a171b9d23617a5156fcb92627efdf51be29ef31f
   end
 
   def highest_total_score
@@ -119,6 +115,7 @@ class StatTracker
 
   def biggest_surprise(season_id)
     @season_stats.biggest_surprise(season_id)
+  end
 
   def winningest_coach(season_param)
     @season_stats.winningest_coach(season_param)
