@@ -63,7 +63,21 @@ class TeamStats < Stats
     find_name(team_id)
   end
 
-  #
-  # def biggest_team_blowout(team_id)
-  # end
+  def biggest_team_blowout(team_id)
+    games_with_team = @games.select do |game|
+      game.away_team_id == team_id || game.home_team_id == team_id
+    end
+
+    game_with_biggest_blowout = games_with_team.max_by do |game|
+      (game.away_goals - game.home_goals).abs
+    end
+
+    if game_with_biggest_blowout.home_team_id == team_id
+      team_id = game_with_biggest_blowout.away_team_id
+    else
+      team_id = game_with_biggest_blowout.home_team_id
+    end
+
+    find_name(team_id)
+  end
 end
