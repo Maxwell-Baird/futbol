@@ -19,6 +19,7 @@ module Compilable
   end
 
   def percentage(arg1, arg2, arg3)
+    #expected .45% instead of 45%
     ((arg1.length / arg2.to_f) * 100).round(2)
   end
 
