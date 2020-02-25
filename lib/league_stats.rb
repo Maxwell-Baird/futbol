@@ -228,7 +228,7 @@ class LeagueStats < Stats
   def average_defense
     average_defense = {}
     defense_helper.each do |key, value|
-      x[key] = total_games_by_team_id(key) / value.to_f
+      average_defense[key] = total_games_by_team_id(key) / value.to_f
     end
     average_defense
   end
