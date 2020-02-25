@@ -83,11 +83,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_best_defense
-    assert_equal "New York Red Bulls", @stat_tracker.best_defense
+    assert_equal "Toronto FC", @stat_tracker.best_defense
   end
 
   def test_it_can_return_worst_defense
-    assert_equal "Portland Thorns FC", @stat_tracker.worst_defense
+    assert_equal "Sporting Kansas City", @stat_tracker.worst_defense
   end
 
   def test_it_can_return_highest_scoring_visitor

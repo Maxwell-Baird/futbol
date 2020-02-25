@@ -43,11 +43,11 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_best_defense
-    assert_equal  "New York Red Bulls", @league_stats.best_defense
+    assert_equal  "Toronto FC", @league_stats.best_defense
   end
 
   def test_worst_defense
-    assert_equal "Portland Thorns FC", @league_stats.worst_defense
+    assert_equal "Sporting Kansas City", @league_stats.worst_defense
   end
 
   def test_highest_scoring_visitor
@@ -162,10 +162,11 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_returns_best_defense
-    assert_equal "New York Red Bulls", @league_stats.best_defense
+    assert_equal "Toronto FC", @league_stats.best_defense
   end
 
   def test_returns_worst_defense
-    assert_equal "Portland Thorns FC", @league_stats.worst_defense
+    assert_equal "Sporting Kansas City", @league_stats.worst_defense
   end
+
 end
