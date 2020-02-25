@@ -1,0 +1,15 @@
+Refactor
+
+  LeagueStats
+    winningest_team
+    scoring
+    percent_differences
+
+  GameStats
+    average_goals_by_season
+
+  SeasonStats
+    winningest_coach
+    worst_coach
+
+  
