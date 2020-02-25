@@ -16,6 +16,7 @@ class TeamStatsTest < Minitest::Test
     @team_stats = TeamStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
   end
 
+
   def test_it_returns_team_info
     # A hash with key/value pairs for the following
     # attributes: team_id,
@@ -29,5 +30,17 @@ class TeamStatsTest < Minitest::Test
                 "link" => "/api/v1/teams/4"
                 }
     assert_equal expected, @team_stats.team_info(1)
+  end
+
+  def test_it_can_name_a_favorite_oppponent_team
+    assert_equal "Houston Dynamo", @team_stats.favorite_opponent("3")
+  end
+
+  def test_it_can_name_a_rival_team
+    assert_equal "FC Dallas", @team_stats.rival("3")
+  end
+
+  def test_it_can_return_biggest_team_blowout
+    assert_equal 2, @team_stats.biggest_team_blowout("3")
   end
 end
