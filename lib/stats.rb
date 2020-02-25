@@ -7,13 +7,8 @@ class Stats
     @game_teams = game_teams
   end
 
-<<<<<<< HEAD
   def find_name(team_id)
     team = @teams.find { |team| team.team_id == team_id }
-=======
-  def find_name(id)
-    team = @teams.find { |team| team.team_id == id }
->>>>>>> 2892b1b4e39da4f89245bea8afcce431ce3a78a2
     team.teamname
   end
 
