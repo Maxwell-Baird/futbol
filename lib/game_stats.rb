@@ -34,7 +34,6 @@ class GameStats < Stats
   end
 
   def count_of_games_by_season
-    #sort by number/games_by_season
     @games.reduce(Hash.new(0)) do |games_by_season, game|
       games_by_season[game.season] += 1
       games_by_season

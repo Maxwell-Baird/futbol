@@ -13,9 +13,12 @@ module Compilable
     method.round(2)
   end
 
-  #need to figure out
-  def average(arg1, arg2)
-      arg1.to_f / arg2
+  def count_data(data)
+
+  end
+
+  def averager(object_count, by_object_count)
+    round(object_count.to_f / by_object_count)
   end
 
   def percentage(arg1, arg2, arg3)
