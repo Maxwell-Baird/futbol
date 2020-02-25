@@ -7,8 +7,7 @@ class SeasonStats < Stats
   end
 
   def shot_accuracy_by_team_id(team_id)
-    (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
-    .round(2)
+    round(total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
   end
 
   def most_accurate_team(season_id)
@@ -17,8 +16,7 @@ class SeasonStats < Stats
   # def least_accurate_team(season_id)
   #   # Name of the Team with the worst ratio of shots to goals for the season
   # end
-
-
+  
 #   def shot_accuracy_by_team_id(team_id)
 #     (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
 #     .floor

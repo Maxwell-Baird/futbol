@@ -1,9 +1,6 @@
 require_relative 'stats'
-require_relative 'compiler'
 
 class GameStats < Stats
-  include Compilable
-  extend Compilable
 
   def initialize(games)
     super(games, teams, game_teams)
@@ -33,7 +30,7 @@ class GameStats < Stats
     ties = @games.count do |game|
       game.away_goals == game.home_goals
     end
-    ties.fdiv(@games.length).round(2)
+    round(ties.fdiv(@games.length))
   end
 
   def count_of_games_by_season
@@ -46,8 +43,7 @@ class GameStats < Stats
 
   def average_goals_per_game
     all_goals = @games.sum { |game| game.away_goals + game.home_goals }
-    sum = all_goals.to_f / @games.length
-    sum.round(2)
+    round(all_goals.to_f / @games.length)
   end
 
   def average_goals_by_season
