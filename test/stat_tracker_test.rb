@@ -162,8 +162,8 @@ class StatTrackerTest < Minitest::Test
   def test_it_returns_team_info
     expected = {
                 "team_id" => "18",
-                "franchiseid" => "34",
-                "teamname" => "Minnesota United FC",
+                "franchise_id" => "34",
+                "team_name" => "Minnesota United FC",
                 "abbreviation" => "MIN",
                 "link" => "/api/v1/teams/18"
                 }
