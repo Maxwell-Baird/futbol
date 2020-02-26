@@ -6,9 +6,12 @@ class SeasonStats < Stats
     super(games, teams, game_teams)
   end
 
-  def shot_accuracy_by_team_id(team_id)
-    (total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
-    .round(2)
+  def most_accurate_team(season_id)
+    find_name(shots_and_goals_per_team(season_id).max_by { |team, ratio| ratio}.first)
+  end
+
+  def least_accurate_team(season_id)
+    find_name(shots_and_goals_per_team(season_id).min_by { |team, ratio| ratio}.first)
   end
 
   def biggest_bust(season_id)
@@ -86,12 +89,10 @@ class SeasonStats < Stats
     find_name(season_games.team_id)
   end
 
-
   def fewest_tackles(season_param)
     season_games = season_game_teams(season_param).min_by { |team| team.tackles }
     find_name(season_games.team_id)
   end
-
 
   def winningest_coach(season_param)
     season_games = season_game_teams(season_param)
@@ -129,4 +130,18 @@ class SeasonStats < Stats
     win_percentages.key(win_percentages.values.min)
   end
 
+  #helper methods
+  def shots_and_goals_per_team(season_id)
+    team_accuracy = {}
+    team_shots = Hash.new(0)
+    team_goals = Hash.new(0)
+    season_game_teams(season_id).each do |game|
+      team_shots[game.team_id] += game.shots
+      team_goals[game.team_id] += game.goals
+    end
+    team_goals.each do |team, goals|
+      team_accuracy[team] = (goals.to_f / team_shots[team])
+    end
+    team_accuracy
+  end
 end
