@@ -37,8 +37,7 @@ class TeamStatsTest < Minitest::Test
   end
 
   def test_it_can_return_biggest_team_blowout
-    skip
-    assert_equal 2, @team_stats.biggest_team_blowout("3")
+    assert_equal 2, @team_stats.biggest_team_blowout("17")
   end
 
   def test_average_win_percentage

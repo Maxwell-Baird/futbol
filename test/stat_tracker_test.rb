@@ -148,8 +148,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_biggest_team_blowout
-    skip
-    assert_equal 2, @stat_tracker.biggest_team_blowout("3")
+    assert_equal 2, @stat_tracker.biggest_team_blowout("17")
   end
 
   def test_it_returns_name_of_team_with_most_tackles
@@ -159,7 +158,6 @@ class StatTrackerTest < Minitest::Test
   def test_it_returns_name_of_team_with_fewest_tackles
     assert_equal "Atlanta United", @stat_tracker.fewest_tackles("20132014")
   end
-
 
   def test_average_win_percentage
     assert_equal 1.0, @stat_tracker.average_win_percentage("1")
