@@ -12,4 +12,8 @@ Refactor
     winningest_coach
     worst_coach
 
-  
+
+  Methods and associated test in order based iteration
+  Helper methods below with tests as well
+  All methods testing via unit test including helpers
+  Continue to refactor with module
