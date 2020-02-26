@@ -8,20 +8,20 @@ require_relative 'team_stats'
 require_relative './modules/data_loadable'
 
 class StatTracker
-  attr_reader :games, :teams, :game_teams, :game_stats, :league_stats
+  attr_reader :game_stats, :league_stats, :season_stats, :team_stats
   include DataLoadable
 
   def self.from_csv(locations)
     StatTracker.new(locations) end
 
   def initialize(locations)
-    @games = csv_data(locations[:games], Game)
-    @teams = csv_data(locations[:teams], Team)
-    @game_teams = csv_data(locations[:game_teams], GameTeam)
-    @game_stats = GameStats.new(@games)
-    @league_stats = LeagueStats.new(@games, @teams, @game_teams)
-    @season_stats = SeasonStats.new(@games, @teams, @game_teams)
-    @team_stats = TeamStats.new(@games, @teams, @game_teams) end
+    games = csv_data(locations[:games], Game)
+    teams = csv_data(locations[:teams], Team)
+    game_teams = csv_data(locations[:game_teams], GameTeam)
+    @game_stats = GameStats.new(games)
+    @league_stats = LeagueStats.new(games, teams, game_teams)
+    @season_stats = SeasonStats.new(games, teams, game_teams)
+    @team_stats = TeamStats.new(games, teams, game_teams) end
 
   def highest_total_score
     @game_stats.highest_total_score end
