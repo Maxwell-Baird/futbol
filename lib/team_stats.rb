@@ -1,5 +1,4 @@
 require_relative 'stats'
-require 'pry'
 
 class TeamStats < Stats
   def initialize(games, teams, game_teams)
