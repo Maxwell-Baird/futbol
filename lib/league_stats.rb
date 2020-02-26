@@ -61,29 +61,43 @@ class LeagueStats < Stats
     team_names = []
     percent_differences.each do |team_id, percent_difference|
       if percent_difference < 0
-        team_names << find_name(team_id) end
+        team_names << find_name(team_id)
+      end
     end
     team_names
   end
 
 # Helper Methods
+  def find_name(id)
+    team_id = @teams.find { |team| team.team_id == id }
+    team_id.teamname
+  end
+
+  def unique_team_ids
+    @game_teams.uniq { |game_team| game_team.team_id}.map { |game_team| game_team.team_id }
+  end
+
   def scoring(hoa, wol)
     scoring_hash = {}
     @game_teams.each do |game_team|
       if game_team.hoa == hoa
-        update_scoring_hash(scoring_hash, game_team) end
+        update_scoring_hash(scoring_hash, game_team)
+      end
     end
     scoring_hash.each_key do |key|
       scoring_hash[key] = scoring_hash[key][0].to_f / scoring_hash[key][1].to_f
     end
-    find_name(low_or_high(wol, scoring_hash)) end
+    find_name(low_or_high(wol, scoring_hash))
+  end
 
   def update_scoring_hash(scoring_hash, game)
     if scoring_hash[game.team_id] == nil
-      scoring_hash[game.team_id] = [0,0] end
+      scoring_hash[game.team_id] = [0,0]
+    end
     scoring_hash[game.team_id][0] += game.goals.to_i
     scoring_hash[game.team_id][1] += 1
-    scoring_hash end
+    scoring_hash
+  end
 
   def low_or_high(wol, scoring_hash)
     id  = {'id' => [scoring_hash[scoring_hash.first.first], scoring_hash.first.first]}
@@ -95,10 +109,12 @@ class LeagueStats < Stats
     end
     id['id'][1] end
 
+
   def update_id(id, key, scoring_hash)
     id['id'][1] = key.to_i
     id['id'][0] = scoring_hash[key]
     id end
+
 
   def home_games
     @game_teams.select { |game_team| game_team.hoa == "home" } end
@@ -152,7 +168,7 @@ class LeagueStats < Stats
     @games.group_by(&:home_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
   end
-
+  
   def away_id_defense_stats
     @games.group_by(&:away_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:home_goals).inject(:+)] }.to_h
