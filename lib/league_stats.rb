@@ -1,4 +1,5 @@
 require_relative 'stats'
+require 'pry'
 
 class LeagueStats < Stats
   def initialize(games, teams, game_teams)
@@ -81,10 +82,6 @@ class LeagueStats < Stats
     team_names
   end
 
-<<<<<<< HEAD
-=======
-# Helper Methods
->>>>>>> d4b012d9085e9d081fccfafd31a14fdc756534e2
   def find_name(id)
     team_id = @teams.find { |team| team.team_id == id }
     team_id.teamname
@@ -165,6 +162,11 @@ class LeagueStats < Stats
     away_win_percentages.default = 0
     percent_differences = {}
     team_ids.each do |team_id|
+      if home_win_percentages[team_id] == nil
+        home_win_percentages[team_id] = 0
+      elsif away_win_percentages[team_id] == nil
+        away_win_percentages[team_id] = 0
+      end
       percent_differences[team_id] = home_win_percentages[team_id] - away_win_percentages[team_id]
     end
     percent_differences
