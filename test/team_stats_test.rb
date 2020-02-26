@@ -18,18 +18,14 @@ class TeamStatsTest < Minitest::Test
 
 
   def test_it_returns_team_info
-    # A hash with key/value pairs for the following
-    # attributes: team_id,
-    # franchise_id, team_name, abbreviation, and link
-
     expected = {
-                "team_id" => '1',
-                "franchiseid" => '16',
-                "teamname" => "Chicago Fire",
-                "abbreviation" => nil,
-                "link" => "/api/v1/teams/4"
+                "team_id" => "18",
+                "franchise_id" => "34",
+                "team_name" => "Minnesota United FC",
+                "abbreviation" => "MIN",
+                "link" => "/api/v1/teams/18"
                 }
-    assert_equal expected, @team_stats.team_info(1)
+    assert_equal expected, @team_stats.team_info("18")
   end
 
   def test_it_can_name_a_favorite_oppponent_team

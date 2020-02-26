@@ -6,13 +6,13 @@ class TeamStats < Stats
   end
 
   def team_info(team_id)
-    index = @teams.index(team_id.to_i)
+    team = @teams.select { |team| team.team_id.to_s == team_id }.first
     {
       "team_id" => team_id.to_s,
-      "franchiseid" => @teams[index].franchise_id,
-      "teamname" => @teams[index].teamname,
-      "abbreviation" => @teams[index].abbreviations,
-      "link" => @teams[index].link
+      "franchise_id" => team.franchise_id.to_s,
+      "team_name" => team.teamname,
+      "abbreviation" => team.abbreviation,
+      "link" => team.link
       }
 
   end
