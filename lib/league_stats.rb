@@ -81,6 +81,10 @@ class LeagueStats < Stats
     team_names
   end
 
+<<<<<<< HEAD
+=======
+# Helper Methods
+>>>>>>> d4b012d9085e9d081fccfafd31a14fdc756534e2
   def find_name(id)
     team_id = @teams.find { |team| team.team_id == id }
     team_id.teamname
