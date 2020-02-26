@@ -7,12 +7,12 @@ class StatTrackerTest < Minitest::Test
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams_truncated.csv'
-    @locations = {
+    locations = {
                 games: game_path,
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    @stat_tracker = StatTracker.from_csv(@locations)
+    @stat_tracker = StatTracker.from_csv(locations)
   end
 
   def test_stat_tracker_exists
@@ -20,14 +20,10 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_instance_of Array, @stat_tracker.games
-    assert_instance_of Game, @stat_tracker.games.first
-    assert_instance_of Array, @stat_tracker.teams
-    assert_instance_of Team, @stat_tracker.teams.first
-    assert_instance_of Array, @stat_tracker.game_teams
-    assert_instance_of GameTeam, @stat_tracker.game_teams.first
     assert_instance_of GameStats, @stat_tracker.game_stats
     assert_instance_of LeagueStats, @stat_tracker.league_stats
+    assert_instance_of SeasonStats, @stat_tracker.season_stats
+    assert_instance_of TeamStats, @stat_tracker.team_stats
   end
 
   def test_it_can_return_highest_total_score
@@ -116,12 +112,6 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_return_worst_fans
     assert_equal ["Real Salt Lake", "Minnesota United FC"], @stat_tracker.worst_fans
-  end
-
-  def test_game_id_tracks_with_season
-    @stat_tracker.games.each do |game|
-      assert_equal game.game_id[0..3], game.season[0..3]
-    end
   end
 
   def test_it_can_name_winningest_coach
