@@ -86,7 +86,7 @@ class TeamStats < Stats
   end
 
   def fewest_goals_scored(team_id)
-    few = 0
+    few = 99
     games.each do |game|
       if team_id == game.home_team_id
         if game.home_goals < few
