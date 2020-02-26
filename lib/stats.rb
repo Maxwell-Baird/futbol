@@ -7,6 +7,14 @@ class Stats
     @game_teams = game_teams
   end
 
+  def percentage(part, whole)
+    part.fdiv(whole).round(2)
+  end
+
+  def average_hashes(hash1, hash2)
+    hash1.merge(hash2) { |key, value| percentage(hash1[key], hash2[key]) }
+  end
+
   def find_name(id)
     team = @teams.find { |team| team.team_id == id }
     team.teamname
