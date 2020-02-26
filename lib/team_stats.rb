@@ -53,16 +53,16 @@ class TeamStats < Stats
 
   def biggest_team_blowout(team_id)
     wins_as_home = @games.select do |game|
-      game.home_team_id == team_id.to_i &&
-      game.home_goals > game.away_goals
+      (game.home_team_id == team_id.to_i) &&
+      (game.home_goals > game.away_goals)
     end
     home_blowout_game = wins_as_home.max_by do |game|
       game.home_goals - game.away_goals
     end
     home_blowout = home_blowout_game.home_goals - home_blowout_game.away_goals
     wins_as_away_team = @games.select do |game|
-      game.away_team_id == team_id.to_i &&
-      game.away_goals > game.home_goals
+      (game.away_team_id == team_id.to_i) &&
+      (game.away_goals > game.home_goals)
     end
     away_blowout_game = wins_as_away_team.max_by do |game|
       game.away_goals - game.home_goals
