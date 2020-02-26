@@ -67,4 +67,18 @@ class TeamStatsTest < Minitest::Test
     input_hash = {}
     assert_equal [0,0], @team_stats.check_empty(game, input_hash)
   end
+
+  def test_count_wins
+    game = Game.new({
+      game_id: '2015030226',
+      season: '20152016',
+      type: "Postseason",
+      away_team_id: 15,
+      home_team_id: 5,
+      away_goals: 3,
+      home_goals: 4
+      })
+    seasons = {}
+    assert_equal 1, @team_stats.count_wins(game, seasons, '5')
+  end
 end
