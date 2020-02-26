@@ -16,6 +16,22 @@ class TeamStatsTest < Minitest::Test
     @team_stats = TeamStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
   end
 
+
+  def test_it_returns_team_info
+    # A hash with key/value pairs for the following
+    # attributes: team_id,
+    # franchise_id, team_name, abbreviation, and link
+
+    expected = {
+                "team_id" => 1,
+                "franchiseid" => 16,
+                "teamname" => "Chicago Fire",
+                "abbreviation" => nil,
+                "link" => "/api/v1/teams/4"
+                }
+    assert_equal expected, @team_stats.team_info(1)
+  end
+
   def test_it_can_name_a_favorite_oppponent_team
     assert_equal "Houston Dynamo", @team_stats.favorite_opponent("3")
   end

@@ -5,6 +5,16 @@ class TeamStats < Stats
     super(games, teams, game_teams)
   end
 
+  def team_info(team_id)
+    {
+      "team_id" => team_id,
+      "franchiseid" => @teams[team_id].franchise_id.to_i,
+      "teamname" => @teams[team_id].teamname,
+      "abbreviation" => @teams[team_id].abbreviations,
+      "link" => @teams[team_id].link
+      }
+  end
+
   def favorite_opponent(team_id)
     # find team that loses to this team most often
     games_with_team = @games.select do |game|
