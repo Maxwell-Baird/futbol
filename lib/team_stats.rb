@@ -6,12 +6,13 @@ class TeamStats < Stats
   end
 
   def team_info(team_id)
+    index = @teams.index(team_id.to_i)
     {
       "team_id" => team_id.to_s,
-      "franchiseid" => @teams[team_id].franchise_id,
-      "teamname" => @teams[team_id].teamname,
-      "abbreviation" => @teams[team_id].abbreviations,
-      "link" => @teams[team_id].link
+      "franchiseid" => @teams[index].franchise_id,
+      "teamname" => @teams[index].teamname,
+      "abbreviation" => @teams[index].abbreviations,
+      "link" => @teams[index].link
       }
 
   end
