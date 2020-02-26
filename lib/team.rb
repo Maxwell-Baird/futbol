@@ -3,7 +3,7 @@ class Team
 
   def initialize(attributes)
     @team_id = attributes[:team_id].to_i
-    @franchise_id = attributes[:franchiseid].to_i
+    @franchise_id = attributes[:franchiseid]
     @teamname = attributes[:teamname]
     @abbreviations = attributes[:abbreviations]
     @link = attributes[:link]

@@ -23,8 +23,8 @@ class TeamStatsTest < Minitest::Test
     # franchise_id, team_name, abbreviation, and link
 
     expected = {
-                "team_id" => 1,
-                "franchiseid" => 16,
+                "team_id" => '1',
+                "franchiseid" => '16',
                 "teamname" => "Chicago Fire",
                 "abbreviation" => nil,
                 "link" => "/api/v1/teams/4"

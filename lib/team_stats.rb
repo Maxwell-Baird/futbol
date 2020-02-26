@@ -1,5 +1,5 @@
 require_relative 'stats'
-
+require 'pry'
 class TeamStats < Stats
   def initialize(games, teams, game_teams)
     super(games, teams, game_teams)
@@ -7,12 +7,13 @@ class TeamStats < Stats
 
   def team_info(team_id)
     {
-      "team_id" => team_id,
-      "franchiseid" => @teams[team_id].franchise_id.to_i,
+      "team_id" => team_id.to_s,
+      "franchiseid" => @teams[team_id].franchise_id,
       "teamname" => @teams[team_id].teamname,
       "abbreviation" => @teams[team_id].abbreviations,
       "link" => @teams[team_id].link
       }
+
   end
 
   def favorite_opponent(team_id)

@@ -179,11 +179,12 @@ class StatTrackerTest < Minitest::Test
 
   def test_fewest_goals_scored
     assert_equal 0, @stat_tracker.fewest_goals_scored("3")
+  end
 
   def test_it_returns_team_info
     expected = {
-                "team_id" => 1,
-                "franchiseid" => 16,
+                "team_id" => '1',
+                "franchiseid" => '16',
                 "teamname" => "Chicago Fire",
                 "abbreviation" => nil,
                 "link" => "/api/v1/teams/4"
