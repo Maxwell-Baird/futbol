@@ -128,9 +128,6 @@ class StatTracker
   def least_accurate_team(season_param)
     @season_stats.least_accurate_team(season_param) end
 
-  def worst_loss(team_id)
-    @team_stats.worst_loss(team_id) end
-
   def fewest_goals_scored(team_id)
     @team_stats.fewest_goals_scored(team_id) end
 
@@ -142,4 +139,13 @@ class StatTracker
 
   def average_win_percentage(team_id)
     @team_stats.average_win_percentage(team_id) end
+
+  def worst_loss(team_id)
+    @team_stats.worst_loss(team_id) end
+
+  def head_to_head(team_id)
+    @team_stats.head_to_head(team_id) end
+
+  def seasonal_summary(team_id)
+    @team_stats.seasonal_summary(team_id) end
 end
