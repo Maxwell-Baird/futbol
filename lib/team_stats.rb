@@ -145,6 +145,6 @@ class TeamStats < Stats
 
   def average_win_percentage(team_id)
     hash = win_percentage_per_season(team_id)
-    best = (hash.values.sum / hash.length).round(2)
+    (hash.values.sum / hash.length).round(2)
   end
 end
