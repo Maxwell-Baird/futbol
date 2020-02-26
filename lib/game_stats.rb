@@ -23,7 +23,7 @@ class GameStats < Stats
   end
 
   def percentage_visitor_wins
-    round(vistor_wins.length.to_f / @games.length)
+    round(visitor_wins.length.to_f / @games.length)
   end
 
   def percentage_ties
@@ -66,7 +66,7 @@ class GameStats < Stats
     @games.find_all { |game| game.away_goals < game.home_goals }
   end
 
-  def vistor_wins
+  def visitor_wins
     @games.find_all { |game| game.away_goals > game.home_goals }
   end
 end

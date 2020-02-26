@@ -8,14 +8,14 @@ class GameStatsTest < Minitest::Test
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams_truncated.csv'
     @locations = {
-                games: game_path,
-                teams: team_path,
-                game_teams: game_teams_path
-              }
+                  games: game_path,
+                  teams: team_path,
+                  game_teams: game_teams_path
+                 }
     @stat_tracker = StatTracker.from_csv(@locations)
     @game_stats = GameStats.new(@stat_tracker.games)
   end
-
+  
   def test_it_exists
     assert_instance_of GameStats, @game_stats
   end
@@ -35,6 +35,14 @@ class GameStatsTest < Minitest::Test
 
   def test_returns_biggest_blowout
     assert_equal 3, @game_stats.biggest_blowout
+  end
+
+  def test_if_can_find_home_wins
+    assert_instance_of Array, @game_stats.home_wins
+  end
+
+  def test_if_can_find_visitor_wins
+    assert_instance_of Array, @game_stats.visitor_wins
   end
 
   def test_it_can_calculate_percentage_home_wins
@@ -61,6 +69,7 @@ class GameStatsTest < Minitest::Test
 
   def test_it_can_calculate_average_goals_per_season
     expected = {"20122013"=>3.97, "20132014"=>4.33}
-      assert_equal expected, @game_stats.average_goals_by_season
+
+    assert_equal expected, @game_stats.average_goals_by_season
   end
 end

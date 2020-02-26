@@ -68,15 +68,6 @@ class LeagueStats < Stats
   end
 
 # Helper Methods
-  def find_name(id)
-    team_id = @teams.find { |team| team.team_id == id }
-    team_id.teamname
-  end
-
-  def unique_team_ids
-    @game_teams.uniq { |game_team| game_team.team_id}.map { |game_team| game_team.team_id }
-  end
-
   def scoring(hoa, wol)
     scoring_hash = {}
     @game_teams.each do |game_team|
@@ -109,15 +100,15 @@ class LeagueStats < Stats
     end
     id['id'][1] end
 
-
   def update_id(id, key, scoring_hash)
     id['id'][1] = key.to_i
     id['id'][0] = scoring_hash[key]
-    id end
-
+    id
+  end
 
   def home_games
-    @game_teams.select { |game_team| game_team.hoa == "home" } end
+    @game_teams.select { |game_team| game_team.hoa == "home" }
+  end
 
   def percent_differences
     home_win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
@@ -168,7 +159,7 @@ class LeagueStats < Stats
     @games.group_by(&:home_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:away_goals).inject(:+)] }.to_h
   end
-  
+
   def away_id_defense_stats
     @games.group_by(&:away_team_id)
     .map{ |id, away_goals| [id, away_goals.map(&:home_goals).inject(:+)] }.to_h
@@ -181,15 +172,11 @@ class LeagueStats < Stats
     end
   end
 
-  def total_games_by_team_id(team_id)
-    games_by_team(team_id).length
-  end
-
   def average_defense
     average_defense = {}
     defense_helper.each do |key, value|
       average_defense[key] = total_games_by_team_id(key) / value.to_f
     end
-    average_defense
+    average_defens
   end
 end
