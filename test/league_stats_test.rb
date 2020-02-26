@@ -43,7 +43,7 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_best_defense
-    assert_equal "Houston Dynamo", @league_stats.best_defense
+    assert_equal  "Toronto FC", @league_stats.best_defense
   end
 
   def test_worst_defense
@@ -140,32 +140,33 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_returns_home_id_and_away_goals
-    expected = {6=>6, 3=>5, 5=>7, 16=>5, 17=>3, 8=>7, 9=>3}
+    expected = {6=>6, 3=>5, 5=>7, 16=>5, 17=>3, 8=>7, 9=>3, 25=>6, 19=>3, 30=>3,
+                15=>5, 52=>1, 29=>1, 10=>5, 26=>3}
 
     assert_equal expected, @league_stats.home_id_defense_stats
   end
 
   def test_returns_away_id_and_home_goals
-    expected = {3=>9, 6=>4, 5=>3, 17=>7, 16=>8, 9=>6, 8=>7}
+    expected = {3=>9, 6=>4, 5=>3, 17=>7, 16=>10, 9=>6, 8=>10, 30=>2, 20=>2,
+                27=>2, 1=>2, 7=>5, 23=>4, 18=>2, 29=>1}
 
     assert_equal expected, @league_stats.away_id_defense_stats
   end
 
   def test_defense_helper_returns_correct_hash
-    expected = {6=>10, 3=>14, 5=>10, 16=>13, 17=>10, 8=>14, 9=>9}
+    expected = {6=>10, 3=>14, 5=>10, 16=>15, 17=>10, 8=>17, 9=>9, 25=>6, 19=>3,
+                30=>5, 15=>5, 52=>1, 29=>2, 10=>5, 26=>3, 20=>2, 27=>2, 1=>2,
+                7=>5, 23=>4, 18=>2}
 
     assert_equal expected, @league_stats.defense_helper
   end
 
   def test_returns_best_defense
-    assert_equal "Houston Dynamo", @league_stats.best_defense
+    assert_equal "Toronto FC", @league_stats.best_defense
   end
 
   def test_returns_worst_defense
     assert_equal "Sporting Kansas City", @league_stats.worst_defense
   end
 
-  def test_returns_average_defense
-    @league_stats.average_defense
-  end
 end
