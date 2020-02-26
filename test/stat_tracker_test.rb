@@ -148,6 +148,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_biggest_team_blowout
+    skip
     assert_equal 2, @stat_tracker.biggest_team_blowout("3")
   end
 
@@ -157,6 +158,27 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_returns_name_of_team_with_fewest_tackles
     assert_equal "Atlanta United", @stat_tracker.fewest_tackles("20132014")
+  end
+
+
+  def test_average_win_percentage
+    assert_equal 1.0, @stat_tracker.average_win_percentage("1")
+  end
+
+  def test_best_season
+    assert_equal "20122013", @stat_tracker.best_season("1")
+  end
+
+  def test_worst_season
+    assert_equal "20122013", @stat_tracker.worst_season("1")
+  end
+
+  def test_most_goals_scored
+    assert_equal 5, @stat_tracker.most_goals_scored("3")
+  end
+
+  def test_fewest_goals_scored
+    assert_equal 0, @stat_tracker.fewest_goals_scored("3")
   end
 
   def test_it_returns_team_info
