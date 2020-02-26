@@ -148,6 +148,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_biggest_team_blowout
+    skip
     assert_equal 2, @stat_tracker.biggest_team_blowout("3")
   end
 
@@ -159,14 +160,35 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Atlanta United", @stat_tracker.fewest_tackles("20132014")
   end
 
+
+  def test_average_win_percentage
+    assert_equal 1.0, @stat_tracker.average_win_percentage("1")
+  end
+
+  def test_best_season
+    assert_equal "20122013", @stat_tracker.best_season("1")
+  end
+
+  def test_worst_season
+    assert_equal "20122013", @stat_tracker.worst_season("1")
+  end
+
+  def test_most_goals_scored
+    assert_equal 5, @stat_tracker.most_goals_scored("3")
+  end
+
+  def test_fewest_goals_scored
+    assert_equal 0, @stat_tracker.fewest_goals_scored("3")
+  end
+
   def test_it_returns_team_info
     expected = {
-                "team_id" => 1,
-                "franchiseid" => 16,
-                "teamname" => "Chicago Fire",
-                "abbreviation" => nil,
-                "link" => "/api/v1/teams/4"
+                "team_id" => "18",
+                "franchise_id" => "34",
+                "team_name" => "Minnesota United FC",
+                "abbreviation" => "MIN",
+                "link" => "/api/v1/teams/18"
                 }
-    assert_equal expected, @stat_tracker.team_info(1)
+    assert_equal expected, @stat_tracker.team_info("18")
   end
 end
