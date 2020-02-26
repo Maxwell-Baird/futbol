@@ -90,11 +90,27 @@ class SeasonStats < Stats
 
   def most_tackles(season_param)
     find_name(season_game_teams(season_param).max_by { |team| team.tackles }
-    .team_id)  
+    .team_id)
   end
 
   def fewest_tackles(season_param)
     find_name(season_game_teams(season_param).min_by { |team| team.tackles }.team_id)
+    # total_tackles = {}
+    total_tackles = season_game_teams(season_param).reduce(Hash.new(0)) do |total_tackles, game_team|
+      total_tackles[game_team.team_id] += game_team.tackles
+      total_tackles
+    end
+    team_id = total_tackles.key(total_tackles.values.max)
+    find_name(team_id)
+  end
+
+  def fewest_tackles(season_param)
+    total_tackles = season_game_teams(season_param).reduce(Hash.new(0)) do |total_tackles, game_team|
+      total_tackles[game_team.team_id] += game_team.tackles
+      total_tackles
+    end
+    team_id = total_tackles.key(total_tackles.values.min)
+    find_name(team_id)
   end
 
   def winningest_coach(season_param)
@@ -132,8 +148,7 @@ class SeasonStats < Stats
     end
     win_percentages.key(win_percentages.values.min)
   end
-
-
+  
   #helper methods
   def shots_and_goals_per_team(season_id)
     team_accuracy = {}
