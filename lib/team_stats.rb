@@ -9,7 +9,6 @@ class TeamStats < Stats
     games_with_team = @games.select do |game|
       game.away_team_id == team_id.to_i || game.home_team_id == team_id.to_i
     end
-
     win_ratios = Hash.new { |hash, key| hash[key] = [0,0] }
     games_with_team.each do |game|
       if game.away_goals > game.home_goals
