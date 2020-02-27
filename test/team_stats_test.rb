@@ -118,6 +118,7 @@ class TeamStatsTest < Minitest::Test
   end
 
   def test_it_can_build_seasonal_summary
+    skip
     expected = {"20162017"=>
       {:postseason=>
         {:win_percentage=>0.59,

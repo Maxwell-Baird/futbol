@@ -245,23 +245,29 @@ class TeamStats < Stats
 
   def total_goals_scored(team_id, type, season)
     games = games_for_team_type_and_season(team_id, type, season)
+    home_goals_scored = 0
+    away_goals_scored = 0
     games.each do |game|
       if home_team?(game, team_id)
-        home_goals_scored = games.sum { |game| game.home_goals }
+        home_goals_scored += game.home_goals
       elsif !home_team?(game, team_id)
-        away_goals_scored = games.sum { |game| game.away_goals }
+        away_goals_scored += game.away_goals
       end
+    end
     home_goals_scored + away_goals_scored
   end
 
   def total_goals_against(team_id, type, season)
     games = games_for_team_type_and_season(team_id, type, season)
+    home_goals_against = 0
+    away_goals_against = 0
     games.each do |game|
       if home_team?(game, team_id)
-        home_goals_against = games.sum { |game| game.away_goals }
+        home_goals_against += game.away_goals
       elsif !home_team?(game, team_id)
-        away_goals_against = games.sum { |game| game.home_goals }
+        away_goals_against += game.home_goals
       end
+    end
     home_goals_against + away_goals_against
   end
 
@@ -276,24 +282,24 @@ class TeamStats < Stats
     games = games_for_team_type_and_season(team_id, type, season)
     percentage(total_goals_against, games.length)
   end
-
-  def season_type_hash(team_id, season)
-    { postseason:
-      {
-        win_percentage: win_percentage(team_id, game.type, game.season),
-        total_goals_scored: total_goals_scored(team_id, game.type, game.season),
-        total_goals_against: total_goals_against(team_id, game.type, game.season),
-        average_goals_scored: average_goals_scored(team_id, game.type, game.season),
-        average_goals_against: average_goals_against(team_id, game.type, game.season)
-      },
-      regular_season:
-      {
-        win_percentage: win_percentage(team_id, game.type, "regular_season"),
-        total_goals_scored: total_goals_scored(team_id, game.type, game.season),
-        total_goals_against: total_goals_against(team_id, game.type, game.season),
-        average_goals_scored: average_goals_scored(team_id, game.type, game.season),
-        average_goals_against: average_goals_against(team_id, game.type, game.season)
-      }
-    }
-  end
 end
+
+  # def season_type_hash(team_id, season)
+  #   { postseason:
+  #     {
+  #       win_percentage: win_percentage(team_id, game.type, game.season),
+  #       total_goals_scored: total_goals_scored(team_id, game.type, game.season),
+  #       total_goals_against: total_goals_against(team_id, game.type, game.season),
+  #       average_goals_scored: average_goals_scored(team_id, game.type, game.season),
+  #       average_goals_against: average_goals_against(team_id, game.type, game.season)
+  #     },
+  #     regular_season:
+  #     {
+  #       win_percentage: win_percentage(team_id, game.type, "regular_season"),
+  #       total_goals_scored: total_goals_scored(team_id, game.type, game.season),
+  #       total_goals_against: total_goals_against(team_id, game.type, game.season),
+  #       average_goals_scored: average_goals_scored(team_id, game.type, game.season),
+  #       average_goals_against: average_goals_against(team_id, game.type, game.season)
+  #     }
+  #   }
+  # end

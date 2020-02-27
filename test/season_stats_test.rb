@@ -70,6 +70,4 @@ class SeasonStatsTest < Minitest::Test
   def test_it_can_biggest_surprise
     assert_equal "Toronto FC", @season_stats.biggest_surprise("20122013")
   end
-
-
 end
