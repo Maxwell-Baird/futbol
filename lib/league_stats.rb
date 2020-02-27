@@ -68,15 +68,6 @@ class LeagueStats < Stats
     team_names
   end
 
-  def find_name(id)
-    team_id = @teams.find { |team| team.team_id == id }
-    team_id.teamname
-  end
-
-  def unique_team_ids
-    @game_teams.uniq { |game_team| game_team.team_id}.map { |game_team| game_team.team_id }
-  end
-
   def scoring(hoa, wol)
     scoring_hash = {}
     @game_teams.each do |game_team|

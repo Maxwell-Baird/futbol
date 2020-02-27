@@ -16,6 +16,10 @@ class Stats
     part.fdiv(whole).round(2)
   end
 
+  def find_by_collection(element, attribute, collection)
+    collection.find_all { |bv| bv.send(attribute) == element }
+  end
+
   def average_hashes(hash1, hash2)
     hash1.merge(hash2) { |key, value| percentage(hash1[key], hash2[key]) }
   end
