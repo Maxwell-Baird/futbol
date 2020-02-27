@@ -1,12 +1,25 @@
 require_relative 'test_helper'
+require './lib/game'
+require './lib/team'
+require './lib/game_team'
 require './lib/stats'
-require 'mocha/minitest'
+require './lib/modules/data_loadable'
 
 class StatsTest < Minitest::Test
+  include DataLoadable
+
   def setup
-    @games = mock('games')
-    @teams = mock('teams')
-    @game_teams = mock('game_teams')
+    game_path = './data/games_truncated.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams_truncated.csv'
+    locations = {
+                games: game_path,
+                teams: team_path,
+                game_teams: game_teams_path
+              }
+    @games = csv_data(locations[:games], Game)
+    @teams = csv_data(locations[:teams], Team)
+    @game_teams = csv_data(locations[:game_teams], GameTeam)
     @stats = Stats.new(@games, @teams, @game_teams)
   end
 

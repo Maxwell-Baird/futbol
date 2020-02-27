@@ -7,7 +7,7 @@ require './lib/modules/data_loadable'
 
 class LeagueStatsTest < Minitest::Test
   include DataLoadable
-  
+
   def setup
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
@@ -17,10 +17,10 @@ class LeagueStatsTest < Minitest::Test
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    games = csv_data(locations[:games], Game)
-    teams = csv_data(locations[:teams], Team)
-    game_teams = csv_data(locations[:game_teams], GameTeam)
-    @league_stats = LeagueStats.new(games, teams, game_teams)
+    @games = csv_data(locations[:games], Game)
+    @teams = csv_data(locations[:teams], Team)
+    @game_teams = csv_data(locations[:game_teams], GameTeam)
+    @league_stats = LeagueStats.new(@games, @teams, @game_teams)
   end
 
   def test_it_exists
@@ -28,12 +28,9 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_instance_of Array, @league_stats.games
-    assert_instance_of Game, @league_stats.games.first
-    assert_instance_of Array, @league_stats.teams
-    assert_instance_of Team, @league_stats.teams.first
-    assert_instance_of Array, @league_stats.game_teams
-    assert_instance_of GameTeam, @league_stats.game_teams.first
+    assert_equal @games, @league_stats.games
+    assert_equal @teams, @league_stats.teams
+    assert_equal @game_teams, @league_stats.game_teams
   end
 
   def test_it_can_return_count_of_teams

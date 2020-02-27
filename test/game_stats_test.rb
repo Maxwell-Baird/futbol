@@ -15,8 +15,8 @@ class GameStatsTest < Minitest::Test
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    games = csv_data(locations[:games], Game)
-    @game_stats = GameStats.new(games)
+    @games = csv_data(locations[:games], Game)
+    @game_stats = GameStats.new(@games)
   end
 
   def test_it_exists
@@ -24,8 +24,7 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_instance_of Array, @game_stats.games
-    assert_instance_of Game, @game_stats.games.first
+    assert_equal @games, @game_stats.games
   end
 
   def test_returns_highest_total_score

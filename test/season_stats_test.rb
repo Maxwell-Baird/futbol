@@ -17,10 +17,10 @@ class SeasonStatsTest < Minitest::Test
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    games = csv_data(locations[:games], Game)
-    teams = csv_data(locations[:teams], Team)
-    game_teams = csv_data(locations[:game_teams], GameTeam)
-    @season_stats = SeasonStats.new(games, teams, game_teams)
+    @games = csv_data(locations[:games], Game)
+    @teams = csv_data(locations[:teams], Team)
+    @game_teams = csv_data(locations[:game_teams], GameTeam)
+    @season_stats = SeasonStats.new(@games, @teams, @game_teams)
   end
 
   def test_it_exists
@@ -28,12 +28,9 @@ class SeasonStatsTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_instance_of Array, @season_stats.games
-    assert_instance_of Game, @season_stats.games.first
-    assert_instance_of Array, @season_stats.teams
-    assert_instance_of Team, @season_stats.teams.first
-    assert_instance_of Array, @season_stats.game_teams
-    assert_instance_of GameTeam, @season_stats.game_teams.first
+    assert_equal @games, @season_stats.games
+    assert_equal @teams, @season_stats.teams
+    assert_equal @game_teams, @season_stats.game_teams
   end
 
   def test_it_returns_name_of_team_with_most_tackles

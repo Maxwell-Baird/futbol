@@ -17,12 +17,21 @@ class TeamStatsTest < Minitest::Test
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    games = csv_data(locations[:games], Game)
-    teams = csv_data(locations[:teams], Team)
-    game_teams = csv_data(locations[:game_teams], GameTeam)
-    @team_stats = TeamStats.new(games, teams, game_teams)
+    @games = csv_data(locations[:games], Game)
+    @teams = csv_data(locations[:teams], Team)
+    @game_teams = csv_data(locations[:game_teams], GameTeam)
+    @team_stats = TeamStats.new(@games, @teams, @game_teams)
   end
 
+  def test_it_an_exist
+    assert_instance_of TeamStats, @team_stats
+  end
+
+  def test_it_has_attributes
+    assert_equal @games, @team_stats.games
+    assert_equal @teams, @team_stats.teams
+    assert_equal @game_teams, @team_stats.game_teams
+  end
 
   def test_it_returns_team_info
     expected = {
