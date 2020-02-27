@@ -1,21 +1,24 @@
 require_relative 'test_helper'
+require './lib/game'
 require './lib/game_stats'
-require './lib/stat_tracker'
+require './lib/modules/data_loadable'
 
 class GameStatsTest < Minitest::Test
+  include DataLoadable
+
   def setup
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams_truncated.csv'
-    @locations = {
-                  games: game_path,
-                  teams: team_path,
-                  game_teams: game_teams_path
-                 }
-    @stat_tracker = StatTracker.from_csv(@locations)
-    @game_stats = GameStats.new(@stat_tracker.games)
+    locations = {
+                games: game_path,
+                teams: team_path,
+                game_teams: game_teams_path
+              }
+    games = csv_data(locations[:games], Game)
+    @game_stats = GameStats.new(games)
   end
-  
+
   def test_it_exists
     assert_instance_of GameStats, @game_stats
   end

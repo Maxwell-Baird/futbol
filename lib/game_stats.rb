@@ -7,30 +7,27 @@ class GameStats < Stats
   end
 
   def highest_total_score
-    total("away_goals", "home_goals", @games).max
+    total_scores.max
   end
 
   def lowest_total_score
-    total("away_goals", "home_goals", @games).min
+    total_scores.min
   end
 
   def biggest_blowout
-    @games.map { |game| (game.away_goals - game.home_goals).abs }.max
+    score_differences.max
   end
 
   def percentage_home_wins
-    round(home_wins.length.to_f / @games.length)
+    percentage(home_wins.length, @games.length)
   end
 
   def percentage_visitor_wins
-    round(visitor_wins.length.to_f / @games.length)
+    percentage(visitor_wins.length, @games.length)
   end
 
   def percentage_ties
-    ties = @games.count do |game|
-      game.away_goals == game.home_goals
-    end
-    round(ties.fdiv(@games.length))
+    percentage(ties.length, @games.length)
   end
 
   def count_of_games_by_season
@@ -41,23 +38,38 @@ class GameStats < Stats
   end
 
   def average_goals_per_game
-    all_goals = @games.sum { |game| game.away_goals + game.home_goals }
-    round(all_goals.to_f / @games.length)
+    percentage(total_scores.sum, @games.length)
   end
 
   def average_goals_by_season
-    goals_per_season = {}
-    @games.each do |game|
-      if goals_per_season[game.season] == nil
-        goals_per_season[game.season] = game.away_goals + game.home_goals
-      else
-        goals_per_season[game.season] += game.away_goals + game.home_goals
-      end
-    end
-    count = count_of_games_by_season
-    @games.reduce(Hash.new(0)) do |average_goals, game|
-      average_goals[game.season] = (goals_per_season[game.season].to_f / count[game.season]).round(2)
-      average_goals
+    average_hashes(goals_by_season, count_of_games_by_season)
+  end
+
+  # Helper Methods
+  def total_scores
+    @games.map { |game| game.home_goals + game.away_goals }
+  end
+
+  def score_differences
+    @games.map { |game| (game.home_goals - game.away_goals).abs }
+  end
+
+  def home_wins
+    @games.select { |game| game.home_goals > game.away_goals }
+  end
+
+  def visitor_wins
+    @games.select { |game| game.home_goals < game.away_goals }
+  end
+
+  def ties
+    @games.select { |game| game.home_goals == game.away_goals }
+  end
+
+  def goals_by_season
+    @games.reduce(Hash.new(0)) do |goals_by_season, game|
+      goals_by_season[game.season] += game.home_goals + game.away_goals
+      goals_by_season
     end
   end
 
