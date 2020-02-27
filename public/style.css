@@ -1,0 +1,41 @@
+
+table
+{  text-decoration: underline;
+  font-weight: bold;
+  font-family: "Lucida Console", Times, serif;
+  font-size: 22px;
+  color: ivory;
+  text-align: center;
+  align: center;
+
+}
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+table-body
+{ align: center;}
+P { text-align: center;
+text-decoration: underline;}
+body
+{
+  font-weight: bold;
+
+  text-align: center;
+  font-family: "Lucida Console", Times, serif;
+  font-size: 40px;
+  color: ivory;
+  background: url("https://lightpolesplus.com/templates/__custom/images/soccer-field-cat-top-banner.jpg") no-repeat center fixed;
+  background-size: cover;
+	line-height: 1.6;
+}
+
+h1 {
+  color: white;
+  border-bottom: 2px solid #2A1959;
+}
+
+h2 {
+  color: white;
+  font-size: 1.2 em;
+}
