@@ -15,11 +15,13 @@ class LeagueStats < Stats
   end
 
   def best_defense
-     find_name(defense_helper.max_by { |id, goals| goals }.first)
+    best_defense_id = average_defense.max_by { |key, value| value }.first
+    find_name(best_defense_id)
   end
 
   def worst_defense
-    find_name(defense_helper.min_by { |id, goals| goals }.first)
+    worst_defense_id = average_defense.min_by { |key, value| value }.first
+    find_name(worst_defense_id)
   end
 
   def lowest_scoring_visitor
