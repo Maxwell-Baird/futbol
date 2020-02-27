@@ -72,13 +72,4 @@ class GameStats < Stats
       goals_by_season
     end
   end
-
-  #helper methods
-  def home_wins
-    @games.find_all { |game| game.away_goals < game.home_goals }
-  end
-
-  def visitor_wins
-    @games.find_all { |game| game.away_goals > game.home_goals }
-  end
 end
