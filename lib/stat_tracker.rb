@@ -6,22 +6,22 @@ require_relative 'league_stats'
 require_relative 'season_stats'
 require_relative 'team_stats'
 require_relative './modules/data_loadable'
-
+  
 class StatTracker
-  attr_reader :games, :teams, :game_teams, :game_stats, :league_stats
+  attr_reader :game_stats, :league_stats, :season_stats, :team_stats
   include DataLoadable
 
   def self.from_csv(locations)
     StatTracker.new(locations) end
 
   def initialize(locations)
-    @games = csv_data(locations[:games], Game)
-    @teams = csv_data(locations[:teams], Team)
-    @game_teams = csv_data(locations[:game_teams], GameTeam)
-    @game_stats = GameStats.new(@games)
-    @league_stats = LeagueStats.new(@games, @teams, @game_teams)
-    @season_stats = SeasonStats.new(@games, @teams, @game_teams)
-    @team_stats = TeamStats.new(@games, @teams, @game_teams) end
+    games = csv_data(locations[:games], Game)
+    teams = csv_data(locations[:teams], Team)
+    game_teams = csv_data(locations[:game_teams], GameTeam)
+    @game_stats = GameStats.new(games)
+    @league_stats = LeagueStats.new(games, teams, game_teams)
+    @season_stats = SeasonStats.new(games, teams, game_teams)
+    @team_stats = TeamStats.new(games, teams, game_teams) end
 
   def highest_total_score
     @game_stats.highest_total_score end
@@ -108,12 +108,10 @@ class StatTracker
     @season_stats.worst_coach(season_param) end
 
   def most_tackles(season_param)
-    @season_stats.most_tackles(season_param)
-  end
+    @season_stats.most_tackles(season_param)  end
 
   def fewest_tackles(season_param)
     @season_stats.fewest_tackles(season_param) end
-
 
   def most_goals_scored(team_id)
     @team_stats.most_goals_scored(team_id) end
@@ -121,15 +119,11 @@ class StatTracker
   def team_info(team_id)
     @team_stats.team_info(team_id) end
 
-
   def most_accurate_team(season_param)
     @season_stats.most_accurate_team(season_param) end
 
   def least_accurate_team(season_param)
     @season_stats.least_accurate_team(season_param) end
-
-  def worst_loss(team_id)
-    @team_stats.worst_loss(team_id) end
 
   def fewest_goals_scored(team_id)
     @team_stats.fewest_goals_scored(team_id) end
@@ -142,4 +136,13 @@ class StatTracker
 
   def average_win_percentage(team_id)
     @team_stats.average_win_percentage(team_id) end
+
+  def worst_loss(team_id)
+    @team_stats.worst_loss(team_id) end
+
+  def head_to_head(team_id)
+    @team_stats.head_to_head(team_id) end
+
+  def seasonal_summary(team_id)
+    @team_stats.seasonal_summary(team_id) end
 end

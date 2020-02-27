@@ -1,9 +1,12 @@
 require_relative 'stats'
 
 class SeasonStats < Stats
-
   def initialize(games, teams, game_teams)
     super(games, teams, game_teams)
+  end
+
+  def shot_accuracy_by_team_id(team_id)
+    round(total_goals_by_team_id(team_id).to_f/total_shots_by_team_id(team_id) * 100.0)
   end
 
   def most_accurate_team(season_id)
@@ -85,7 +88,6 @@ class SeasonStats < Stats
   end
 
   def most_tackles(season_param)
-    # total_tackles = {}
     total_tackles = season_game_teams(season_param).reduce(Hash.new(0)) do |total_tackles, game_team|
       total_tackles[game_team.team_id] += game_team.tackles
       total_tackles

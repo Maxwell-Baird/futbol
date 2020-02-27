@@ -1,23 +1,36 @@
 require_relative 'test_helper'
+require './lib/game'
+require './lib/team'
+require './lib/game_team'
 require './lib/season_stats'
-require './lib/stat_tracker'
+require './lib/modules/data_loadable'
 
 class SeasonStatsTest < Minitest::Test
+  include DataLoadable
+
   def setup
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams_truncated.csv'
-    @locations = {
+    locations = {
                 games: game_path,
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    @stat_tracker = StatTracker.from_csv(@locations)
-    @season_stats = SeasonStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
+    @games = csv_data(locations[:games], Game)
+    @teams = csv_data(locations[:teams], Team)
+    @game_teams = csv_data(locations[:game_teams], GameTeam)
+    @season_stats = SeasonStats.new(@games, @teams, @game_teams)
   end
 
   def test_it_exists
     assert_instance_of SeasonStats, @season_stats
+  end
+
+  def test_it_has_attributes
+    assert_equal @games, @season_stats.games
+    assert_equal @teams, @season_stats.teams
+    assert_equal @game_teams, @season_stats.game_teams
   end
 
   def test_it_returns_name_of_team_with_most_tackles
@@ -43,7 +56,6 @@ class SeasonStatsTest < Minitest::Test
   def test_worst_coach
     assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
   end
-
 
   def test_it_can_return_hash_with_shots_and_goals_per_team
     expected = {24=>0.375, 20=>0.5, 26=>0.16666666666666666}

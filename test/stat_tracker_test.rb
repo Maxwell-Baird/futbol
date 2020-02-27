@@ -7,12 +7,12 @@ class StatTrackerTest < Minitest::Test
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams_truncated.csv'
-    @locations = {
+    locations = {
                 games: game_path,
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    @stat_tracker = StatTracker.from_csv(@locations)
+    @stat_tracker = StatTracker.from_csv(locations)
   end
 
   def test_stat_tracker_exists
@@ -20,14 +20,10 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_instance_of Array, @stat_tracker.games
-    assert_instance_of Game, @stat_tracker.games.first
-    assert_instance_of Array, @stat_tracker.teams
-    assert_instance_of Team, @stat_tracker.teams.first
-    assert_instance_of Array, @stat_tracker.game_teams
-    assert_instance_of GameTeam, @stat_tracker.game_teams.first
     assert_instance_of GameStats, @stat_tracker.game_stats
     assert_instance_of LeagueStats, @stat_tracker.league_stats
+    assert_instance_of SeasonStats, @stat_tracker.season_stats
+    assert_instance_of TeamStats, @stat_tracker.team_stats
   end
 
   def test_it_can_return_highest_total_score
@@ -118,12 +114,6 @@ class StatTrackerTest < Minitest::Test
     assert_equal ["Real Salt Lake", "Minnesota United FC"], @stat_tracker.worst_fans
   end
 
-  def test_game_id_tracks_with_season
-    @stat_tracker.games.each do |game|
-      assert_equal game.game_id[0..3], game.season[0..3]
-    end
-  end
-
   def test_it_can_name_winningest_coach
     assert_equal "Bruce Boudreau", @stat_tracker.winningest_coach("20142015")
   end
@@ -148,8 +138,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_return_biggest_team_blowout
-    skip
-    assert_equal 2, @stat_tracker.biggest_team_blowout("3")
+    assert_equal 2, @stat_tracker.biggest_team_blowout("17")
   end
 
   def test_it_returns_name_of_team_with_most_tackles
@@ -159,7 +148,6 @@ class StatTrackerTest < Minitest::Test
   def test_it_returns_name_of_team_with_fewest_tackles
     assert_equal "Atlanta United", @stat_tracker.fewest_tackles("20132014")
   end
-
 
   def test_average_win_percentage
     assert_equal 1.0, @stat_tracker.average_win_percentage("1")
@@ -190,5 +178,97 @@ class StatTrackerTest < Minitest::Test
                 "link" => "/api/v1/teams/18"
                 }
     assert_equal expected, @stat_tracker.team_info("18")
+  end
+
+  def test_it_can_return_worst_loss
+    assert_equal 3, @stat_tracker.worst_loss("5")
+  end
+
+  def test_it_can_make_a_head_to_head_hash
+    assert_equal ({"New York Red Bulls" => 0.6}), @stat_tracker.head_to_head("9")
+  end
+
+  def test_it_can_build_seasonal_summary
+    skip
+    expected = {"20162017"=>
+      {:postseason=>
+        {:win_percentage=>0.59,
+         :total_goals_scored=>48,
+         :total_goals_against=>40,
+         :average_goals_scored=>2.18,
+         :average_goals_against=>1.82},
+       :regular_season=>
+        {:win_percentage=>0.38,
+         :total_goals_scored=>180,
+         :total_goals_against=>170,
+         :average_goals_scored=>2.2,
+         :average_goals_against=>2.07}},
+     "20172018"=>
+      {:postseason=>
+        {:win_percentage=>0.54,
+         :total_goals_scored=>29,
+         :total_goals_against=>28,
+         :average_goals_scored=>2.23,
+         :average_goals_against=>2.15},
+       :regular_season=>
+        {:win_percentage=>0.44,
+         :total_goals_scored=>187,
+         :total_goals_against=>162,
+         :average_goals_scored=>2.28,
+         :average_goals_against=>1.98}},
+     "20132014"=>
+      {:postseason=>
+        {:win_percentage=>0.0,
+         :total_goals_scored=>0,
+         :total_goals_against=>0,
+         :average_goals_scored=>0.0,
+         :average_goals_against=>0.0},
+       :regular_season=>
+        {:win_percentage=>0.38,
+         :total_goals_scored=>166,
+         :total_goals_against=>177,
+         :average_goals_scored=>2.02,
+         :average_goals_against=>2.16}},
+     "20122013"=>
+      {:postseason=>
+        {:win_percentage=>0.0,
+         :total_goals_scored=>0,
+         :total_goals_against=>0,
+         :average_goals_scored=>0.0,
+         :average_goals_against=>0.0},
+       :regular_season=>
+        {:win_percentage=>0.25,
+         :total_goals_scored=>85,
+         :total_goals_against=>103,
+         :average_goals_scored=>1.77,
+         :average_goals_against=>2.15}},
+     "20142015"=>
+      {:postseason=>
+        {:win_percentage=>0.67,
+         :total_goals_scored=>17,
+         :total_goals_against=>13,
+         :average_goals_scored=>2.83,
+         :average_goals_against=>2.17},
+       :regular_season=>
+        {:win_percentage=>0.5,
+         :total_goals_scored=>186,
+         :total_goals_against=>162,
+         :average_goals_scored=>2.27,
+         :average_goals_against=>1.98}},
+     "20152016"=>
+      {:postseason=>
+        {:win_percentage=>0.36,
+         :total_goals_scored=>25,
+         :total_goals_against=>33,
+         :average_goals_scored=>1.79,
+         :average_goals_against=>2.36},
+       :regular_season=>
+        {:win_percentage=>0.45,
+         :total_goals_scored=>178,
+         :total_goals_against=>159,
+         :average_goals_scored=>2.17,
+         :average_goals_against=>1.94}}}
+
+    assert_equal expected, @league_stats.seasonal_summary("3")
   end
 end
