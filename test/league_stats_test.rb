@@ -1,20 +1,25 @@
 require_relative 'test_helper'
+require './lib/game'
+require './lib/team'
+require './lib/game_team'
 require './lib/league_stats'
-require './lib/stat_tracker'
+require './lib/modules/data_loadable'
 
 class LeagueStatsTest < Minitest::Test
+  include DataLoadable
   def setup
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams_truncated.csv'
-    @locations = {
+    locations = {
                 games: game_path,
                 teams: team_path,
                 game_teams: game_teams_path
               }
-    @stat_tracker = StatTracker.from_csv(@locations)
-    @league_stats = LeagueStats.new(@stat_tracker.games, @stat_tracker.teams, @stat_tracker.game_teams)
-    @game_teams = @league_stats.game_teams[1]
+    games = csv_data(locations[:games], Game)
+    teams = csv_data(locations[:teams], Team)
+    game_teams = csv_data(locations[:game_teams], GameTeam)
+    @league_stats = LeagueStats.new(games, teams, game_teams)
   end
 
   def test_it_exists
@@ -126,8 +131,9 @@ class LeagueStatsTest < Minitest::Test
   def test_game_teams_stats_update_scoring_hash
     scoring_hash = {}
     result = {6 => [3,1]}
+    game_team = @league_stats.game_teams[1]
 
-    assert_equal result, @league_stats.update_scoring_hash(scoring_hash, @game_teams)
+    assert_equal result, @league_stats.update_scoring_hash(scoring_hash, game_team)
   end
 
   def test_game_teams_stats_update_id
