@@ -63,6 +63,42 @@ class GameStatsTest < Minitest::Test
 
   def test_it_can_calculate_average_goals_per_season
     expected = {"20122013"=>3.97, "20132014"=>4.33}
-      assert_equal expected, @game_stats.average_goals_by_season
+
+    assert_equal expected, @game_stats.average_goals_by_season
+  end
+
+  def test_it_can_calculate_total_scores
+    expected = [5, 5, 3, 5, 4, 3, 5, 3, 1, 3, 3, 4, 2, 3, 5, 3, 4, 4, 5, 5, 5,
+      7, 3, 5, 5, 3, 4, 2, 6, 4, 3, 5, 5]
+
+    assert_equal expected, @game_stats.total_scores
+  end
+
+  def test_it_can_return_score_differences
+    expected = [1, 1, 1, 1, 2, 3, 3, 1, 1, 1, 1, 2, 2, 1, 1, 1, 0, 2, 3, 1, 3,
+        3, 1, 1, 1, 1, 2, 0, 0, 0, 1, 1, 1]
+
+    assert_equal expected , @game_stats.score_differences
+  end
+
+  def test_if_can_find_home_wins
+    assert_instance_of Array, @game_stats.home_wins
+    assert_equal 18, @game_stats.home_wins.count
+  end
+
+  def test_if_can_find_visitor_wins
+    assert_instance_of Array, @game_stats.visitor_wins
+    assert_equal 11, @game_stats.visitor_wins.count
+  end
+
+  def test_it_can_return_ties
+    assert_instance_of Array, @game_stats.ties
+    assert_equal 4, @game_stats.ties.count
+  end
+
+  def test_it_can_calculate_goals_by_season
+    expected = {"20122013"=>119, "20132014"=>13}
+
+    assert_equal expected, @game_stats.goals_by_season
   end
 end

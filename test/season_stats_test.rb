@@ -57,7 +57,6 @@ class SeasonStatsTest < Minitest::Test
     assert_equal "John Tortorella", @season_stats.worst_coach("20122013")
   end
 
-
   def test_it_can_return_hash_with_shots_and_goals_per_team
     expected = {24=>0.375, 20=>0.5, 26=>0.16666666666666666}
 

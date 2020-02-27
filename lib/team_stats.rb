@@ -14,7 +14,6 @@ class TeamStats < Stats
       "abbreviation" => team.abbreviation,
       "link" => team.link
       }
-
   end
 
   def favorite_opponent(team_id)
@@ -35,8 +34,8 @@ class TeamStats < Stats
     win_percentages = win_ratios.each_with_object(Hash.new) do |(team_id, win_ratio), win_percent|
       win_percent[team_id] = win_ratio[0].fdiv(win_ratio[1]) * 100
     end
-    team_id = win_percentages.key(win_percentages.values.min)
-    find_name(team_id)
+
+    find_name(win_percentages.key(win_percentages.values.min))
   end
 
   def rival(team_id)

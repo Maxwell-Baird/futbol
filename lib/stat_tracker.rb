@@ -6,7 +6,7 @@ require_relative 'league_stats'
 require_relative 'season_stats'
 require_relative 'team_stats'
 require_relative './modules/data_loadable'
-
+  
 class StatTracker
   attr_reader :game_stats, :league_stats, :season_stats, :team_stats
   include DataLoadable
@@ -108,8 +108,7 @@ class StatTracker
     @season_stats.worst_coach(season_param) end
 
   def most_tackles(season_param)
-    @season_stats.most_tackles(season_param)
-  end
+    @season_stats.most_tackles(season_param)  end
 
   def fewest_tackles(season_param)
     @season_stats.fewest_tackles(season_param) end

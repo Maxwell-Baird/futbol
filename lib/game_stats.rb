@@ -1,6 +1,7 @@
 require_relative 'stats'
 
 class GameStats < Stats
+
   def initialize(games)
     super(games, teams, game_teams)
   end
