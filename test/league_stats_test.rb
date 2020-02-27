@@ -7,6 +7,7 @@ require './lib/modules/data_loadable'
 
 class LeagueStatsTest < Minitest::Test
   include DataLoadable
+  
   def setup
     game_path = './data/games_truncated.csv'
     team_path = './data/teams.csv'
