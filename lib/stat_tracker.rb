@@ -6,13 +6,10 @@ require_relative 'league_stats'
 require_relative 'season_stats'
 require_relative 'team_stats'
 require_relative './modules/data_loadable'
-require_relative './modules/compiler'
-
+  
 class StatTracker
   attr_reader :game_stats, :league_stats, :season_stats, :team_stats
   include DataLoadable
-  include Compilable
-  extend Compilable
 
   def self.from_csv(locations)
     StatTracker.new(locations) end

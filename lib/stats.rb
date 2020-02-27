@@ -1,9 +1,4 @@
-require_relative './modules/compiler'
-
 class Stats
-  include Compilable
-  extend Compilable
-
   attr_reader :games, :teams, :game_teams
 
   def initialize(games, teams, game_teams)
