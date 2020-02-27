@@ -1,0 +1,248 @@
+<%= require './lib/stat_tracker'
+
+game_path = './data/games.csv'
+team_path = './data/teams.csv'
+game_teams_path = './data/game_teams.csv'
+
+locations = {
+  games: game_path,
+  teams: team_path,
+  game_teams: game_teams_path
+}
+stat_tracker = StatTracker.from_csv(locations)%>
+
+<div class="card">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <h1 class="title">FUTBOL</h1>
+  <h2 class="title">Whitney, Max, Alex, Tyler</h2>
+  <div class="stats-container">
+    <div class="card">
+      <h1 class="title">Game Statistics</h1>
+      <div class="stats-container">
+        <table class="stats-table">
+          <td> style="text-align:center" <td>
+          <tr>
+            <link rel="stylesheet" type="text/css" href="style.css">
+            <th>highest total score</th>
+            <td><%= stat_tracker.highest_total_score %></td>
+          </tr>
+          <tr>
+            <th>lowest total score</th>
+            <td><%= stat_tracker.lowest_total_score %></td>
+          </tr>
+          <tr>
+            <th>biggest blowout</th>
+            <td><%= stat_tracker.biggest_blowout %></td>
+          </tr>
+          <tr>
+            <th>percentage home wins</th>
+            <td><%= stat_tracker.percentage_home_wins %></td>
+          </tr>
+          <tr>
+            <th>percentage visitor wins</th>
+            <td><%= stat_tracker.percentage_visitor_wins %></td>
+          </tr>
+          <tr>
+            <th>percentage ties</th>
+            <td><%= stat_tracker.percentage_ties %></td>
+          </tr>
+          <tr>
+            <table class="stats-table">
+              <tr>
+                <th>season</th>
+                <th>game count</th>
+                <th>average goals</th>
+              </tr>
+              <% stat_tracker.count_of_games_by_season.sort.each do |gs| %>
+              <tr>
+                <td><%= gs[0] %></td>
+                <td><%= gs[1] %></td>
+                <td><%= stat_tracker.average_goals_by_season[gs[0]] %></td>
+              </tr>
+              <% end %>
+              <tr>
+              </table>
+            </div>
+          </div>
+  <div class="card">
+    <h1 class="title">League Statistics</h1>
+    <div class="stats-container">
+      <table class="stats-table">
+        <tr>
+          <th>Count of teams</th>
+          <td><%= stat_tracker.count_of_teams %></td>
+        </tr>
+        <tr>
+          <th>Best offense</th>
+          <td><%= stat_tracker.best_offense %></td>
+        </tr>
+        <tr>
+          <th>Worst offense</th>
+          <td><%= stat_tracker.worst_offense %></td>
+        </tr>
+        <tr>
+          <th>Best defense</th>
+          <td><%= stat_tracker.best_defense %></td>
+        </tr>
+        <tr>
+          <th>Worst defense</th>
+          <td><%= stat_tracker.worst_defense %></td>
+        </tr>
+        <tr>
+          <th>Highest scoring visitor</th>
+          <td><%= stat_tracker.highest_scoring_visitor %></td>
+        </tr>
+        <tr>
+          <th>highest scoring visitor</th>
+          <td><%= stat_tracker.highest_scoring_visitor %></td>
+        </tr>
+        <tr>
+          <th>Lowest scoring visitor</th>
+          <td><%= stat_tracker.lowest_scoring_visitor%></td>
+        </tr>
+        <tr>
+          <th>Winningest team</th>
+          <td><%= stat_tracker.winningest_team %></td>
+        </tr>
+        <tr>
+          <th>Best fans</th>
+          <td><%= stat_tracker.best_fans %></td>
+        </tr>
+        <tr>
+          <th>Worst fans</th>
+          <td><%= stat_tracker.worst_fans.join(", ") %></td>
+        </tr>
+        <tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <h1 class="title">Team Statistics</h1>
+      <div class="stats-container">
+        <table class="stats-table">
+          <tr>
+            <th>Fewest goals scored </th>
+            <td><%= stat_tracker.fewest_goals_scored("18") %></td>
+          </tr>
+          <tr>
+            <th>Best season</th>
+            <td><%= stat_tracker.best_season("6") %></td>
+          </tr>
+          <tr>
+            <th>Worst season</th>
+            <td><%= stat_tracker.worst_season("6") %></td>
+          </tr>
+          <tr>
+            <th>Average win percentage </th>
+            <td><%= stat_tracker.average_win_percentage("6") %></td>
+          </tr>
+          <tr>
+            <th>Worst loss</th>
+            <td><%= stat_tracker.worst_loss("18") %></td>
+          </tr>
+          <tr>
+            <th>favorite opponent</th>
+            <td><%= stat_tracker.favorite_opponent("18") %></td>
+          </tr>
+          <tr>
+            <th>Rival</th>
+            <td><%= stat_tracker.rival("18") %></td>
+          </tr>
+          <tr>
+            <th>Biggest team blowout</th>
+            <td><%= stat_tracker.biggest_team_blowout("18") %></td>
+          </tr>
+          <tr>
+            <div>
+              <th>Head-to-Head Information</th>
+              <table class="stats-table">
+                <tr>
+                  <th>Opponent</th>
+                  <th>Win percentage</th>
+                </tr>
+                <% stat_tracker.head_to_head("18").sort.each do |pair| %>
+                <tr>
+                  <td><%= pair[0] %></td>
+                  <td><%= pair[1] %></td>
+                </tr>
+                <% end %>
+              </table>
+            </div>
+    <table class="stats-table">
+      <div class="card">
+        <h1 class="title">Season Statistics (Season 20132014 )</h1>
+        <div class="stats-container">
+          <% season_id1 = "20132014" %>
+          <table class="stats-table">
+            <tr>
+              <th>Biggest bust </th>
+              <td><%= stat_tracker.biggest_bust(season_id1)%></td
+              </tr>
+              <tr>
+                <th>Biggest surprise</th>
+                <td><%= stat_tracker.biggest_surprise(season_id1)%></td>
+              </tr>
+              <tr>
+                <th>Winningest Coach</th>
+                <td><%= stat_tracker.winningest_coach(season_id1)%></td>
+              </tr>
+              <tr>
+                <th>Worst Coach</th>
+                <td><%= stat_tracker.worst_coach(season_id1)%></td>
+              </tr>
+              <tr>
+                <th>Most tackles</th>
+                <td><%= stat_tracker.most_tackles(season_id1)%></td>
+              </tr>
+              <tr>
+                <th>Fewest tackles</th>
+                <td><%= stat_tracker.fewest_tackles(season_id1)%></td>
+              </tr>
+              <tr>
+                <th>Most accurate team</th>
+                <td><%= stat_tracker.most_accurate_team(season_id1)%></td>
+              </tr>
+              <tr>
+                <th>Least accurate team</th>
+                <td><%= stat_tracker.least_accurate_team(season_id1)%></td>
+              </tr>
+              <tr>
+    <table class="stats-table">
+      <div class="card">
+        <h1 class="title">Season Statistics (Season 20142015 )</h1>
+        <div class="stats-container">
+          <% season_id2 = "20142015" %>
+          <table class="stats-table">
+            <tr>
+              <th>Biggest bust </th>
+              <td><%= stat_tracker.biggest_bust(season_id2)%></td
+              </tr>
+              <tr>
+                <th>Biggest surprise</th>
+                <td><%= stat_tracker.biggest_surprise(season_id2)%></td>
+              </tr>
+              <tr>
+                <th>Winningest Coach</th>
+                <td><%= stat_tracker.winningest_coach(season_id2)%></td>
+              </tr>
+              <tr>
+                <th>Worst Coach</th>
+                <td><%= stat_tracker.worst_coach(season_id2)%></td>
+              </tr>
+              <tr>
+                <th>Most tackles</th>
+                <td><%= stat_tracker.most_tackles(season_id2)%></td>
+              </tr>
+              <tr>
+                <th>Fewest tackles</th>
+                <td><%= stat_tracker.fewest_tackles(season_id2)%></td>
+              </tr>
+              <tr>
+                <th>Most accurate team</th>
+                <td><%= stat_tracker.most_accurate_team(season_id2)%></td>
+              </tr>
+              <tr>
+                <th>Least accurate team</th>
+                <td><%= stat_tracker.least_accurate_team(season_id2)%></td>
+              </tr>
+              <tr>

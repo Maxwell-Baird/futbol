@@ -6,7 +6,7 @@ require_relative 'league_stats'
 require_relative 'season_stats'
 require_relative 'team_stats'
 require_relative './modules/data_loadable'
-  
+
 class StatTracker
   attr_reader :game_stats, :league_stats, :season_stats, :team_stats
   include DataLoadable
@@ -23,7 +23,7 @@ class StatTracker
     @season_stats = SeasonStats.new(games, teams, game_teams)
     @team_stats = TeamStats.new(games, teams, game_teams) end
 
-  def highest_total_score
+  def highest_total_score 
     @game_stats.highest_total_score end
 
   def lowest_total_score
